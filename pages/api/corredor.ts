@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PTYCardsParams, ResponseCallback, SplitJSON, curlHandler, post, processResponseJSONString } from '@/utils/common';
+import { PTYCardsParams, curlHandler } from '@/utils/common';
 
-const URL1 = 'http://enacorredores.com/api/v2/get-saldo-panapass/json';
+import { fetch } from './v2/corredor';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
   const { query, method, body } = req;
@@ -11,46 +11,16 @@ export default async (req: NextApiRequest, res: NextApiResponse<Record<string, a
 
   const params: PTYCardsParams = {
     user: numTarjeta,
-    device: device,
-    version: version,
-    lang: lang,
+    device,
+    version,
+    lang,
   };
 
-  return curlHandler(params, fetch, req, res);
-};
-
-const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
-  const headers = {
-    Referer: 'http://enacorredores.com',
-  };
-
-  const body = {
-    panapass: params.user,
-  };
-
-  post(
-    URL1,
-    body,
-    headers,
-    undefined,
-    (responseString) => {
-      const result = processResponseJSONString(responseString, CONFIG);
-
-      callback({
-        status: result.status,
-        msg: result.msg,
-        balance: result.saldo ? Number.parseFloat(result.saldo).toFixed(2) : null,
-      });
+  return curlHandler(params, fetch, req, res, (inputV2: Record<string, any>) => ({
+    status: inputV2.status,
+    data: {
+      numTarjeta: inputV2.numTarjeta,
+      saldo: inputV2.balance,
     },
-    30000
-  );
+  }));
 };
-
-/*************** SPLITTERS ***************/
-
-const CONFIG: SplitJSON[] = [
-  {
-    field: 'saldo',
-    required: true,
-  },
-];

@@ -38,8 +38,13 @@ export type SplitJSON = {
 };
 
 type FETCH = (params: PTYCardsParams, callback: ResponseCallback) => void;
+type V2_TO_V1 = (inputV2: Record<string, any>) => Record<string, any>;
 
-export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
+const defaultConverter: V2_TO_V1 = (inputV2: Record<string, any>) => {
+  return inputV2;
+};
+
+export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRequest, res: NextApiResponse<Record<string, any>>, converter = defaultConverter) => {
   const { method } = req;
   return new Promise((resolve, reject) => {
     switch (method) {
@@ -47,7 +52,7 @@ export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRe
         fetch(params, (body: Record<string, any>) => {
           // insertLog(input, body, req.params.service, () => {
           // services.register(input, body.status, req.params.service);
-          res.status(200).json(body);
+          res.status(200).json(converter(body));
           return resolve(body);
           // });
         });
@@ -56,7 +61,7 @@ export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRe
         fetch(params, (body: Record<string, any>) => {
           // insertLog(input, body, req.params.service, () => {
           // services.register(input, body.status, req.params.service);
-          res.status(200).json(body);
+          res.status(200).json(converter(body));
           return resolve(body);
           // });
         });
