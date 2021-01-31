@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PTYCardsParams, curlHandler } from '@/utils/common';
 
-import { fetch } from './v2/metrobus';
+import { fetch } from '../v2/metrobus';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
   const { query, method, body } = req;

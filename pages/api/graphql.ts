@@ -52,12 +52,12 @@ const promiseWrapper = (url: string, params: Record<string, any>): Promise<strin
 const resolvers = {
   Query: {
     metrobus: async (parent, args, context) => {
-      const url = 'http://localhost:3000/api/v2/metrobus';
+      const url = 'http://localhost:3000/api/ptycards/v2/metrobus';
       const response = await promiseWrapper(url, args);
       return JSON.parse(response);
     },
     corredor: async (parent, args, context) => {
-      const url = 'http://localhost:3000/api/v2/corredor';
+      const url = 'http://localhost:3000/api/ptycards/v2/corredor';
       const response = await promiseWrapper(url, args);
       return JSON.parse(response);
     },
