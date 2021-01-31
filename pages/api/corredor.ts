@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PTYCardsParams, ResponseCallback, SplitJSON, curlHandler, post, processResponseJSONString } from '../../utils/common';
+import { PTYCardsParams, ResponseCallback, SplitJSON, curlHandler, post, processResponseJSONString } from '@/utils/common';
 
 const URL1 = 'http://enacorredores.com/api/v2/get-saldo-panapass/json';
 

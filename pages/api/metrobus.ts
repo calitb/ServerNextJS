@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PTYCardsParams, ResponseCallback, Split, curlHandler, get, processResponseString } from '../../utils/common';
+import { PTYCardsParams, ResponseCallback, Split, curlHandler, get, processResponseString } from '@/utils/common';
 
 const URL1 = 'http://200.46.245.230:8080/PortalCAE-WAR-MODULE/SesionPortalServlet';
 
