@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Record<string, a
   return curlHandler(params, fetch, req, res, (inputV2: Record<string, any>) => ({
     status: inputV2.status,
     data: {
-      numCliente: inputV2.numCliente,
+      numCliente: numCliente,
       fechaVencimiento: inputV2 ? inputV2.date : null,
       saldoAgua: inputV2 ? inputV2.water : null,
       saldoBasura: inputV2 ? inputV2.waste : null,
