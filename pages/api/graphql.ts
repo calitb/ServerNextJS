@@ -4,11 +4,59 @@ import { get } from '@/utils/common';
 
 const typeDefs = gql`
   type Query {
-    metrobus(user: String!): Result!
-    corredor(user: String!): Result!
-    idaan(user: String!, name: String!): Result!
-    ensa(user: String!, pass: String!): Result!
-    cableonda(user: String!): Result!
+    """
+    Fetch metrobus balance
+    """
+    metrobus(
+      """
+      Card number
+      """
+      user: String!
+    ): Result!
+    """
+    Fetch prepaid Panapass balance
+    """
+    corredor(
+      """
+      Prepaid Panapass number
+      """
+      user: String!
+    ): Result!
+    """
+    Fetch IDAAN balance
+    """
+    idaan(
+      """
+      Account number
+      """
+      user: String!
+      """
+      Account owner
+      """
+      name: String!
+    ): Result!
+    """
+    Fetch ENSA balance
+    """
+    ensa(
+      """
+      Account username
+      """
+      user: String!
+      """
+      Account password
+      """
+      pass: String!
+    ): Result!
+    """
+    Fetch Cable Onda balance
+    """
+    cableonda(
+      """
+      Account number
+      """
+      user: String!
+    ): Result!
   }
   type Datetime {
     date: String!
@@ -32,7 +80,7 @@ const typeDefs = gql`
     """
     status: String!
     """
-    Error message
+    Debug error message
     """
     msg: String
     """
