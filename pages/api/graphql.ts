@@ -7,6 +7,7 @@ const typeDefs = gql`
     metrobus(user: String!): Result!
     corredor(user: String!): Result!
     idaan(user: String!, name: String!): Result!
+    ensa(user: String!, pass: String!): Result!
   }
   type Datetime {
     date: String!
@@ -33,6 +34,14 @@ const typeDefs = gql`
     Error message
     """
     msg: String
+    """
+    Error message
+    """
+    error_msg: String
+    """
+    Account number
+    """
+    account: String
     """
     Account balance
     """
@@ -70,6 +79,11 @@ const resolvers = {
     },
     idaan: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/idaan';
+      const response = await promiseWrapper(url, args);
+      return JSON.parse(response);
+    },
+    ensa: async (parent, args, context) => {
+      const url = 'http://localhost:3000/api/ptycards/v2/ensa';
       const response = await promiseWrapper(url, args);
       return JSON.parse(response);
     },
