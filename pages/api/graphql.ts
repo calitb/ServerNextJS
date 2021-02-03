@@ -40,7 +40,7 @@ const typeDefs = gql`
     """
     ensa(
       """
-      Account username
+      Account number
       """
       user: String!
       """
