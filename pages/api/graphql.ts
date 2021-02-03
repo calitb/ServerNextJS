@@ -6,6 +6,7 @@ const typeDefs = gql`
   type Query {
     metrobus(user: String!): Result!
     corredor(user: String!): Result!
+    idaan(user: String!, name: String!): Result!
   }
   type Datetime {
     date: String!
@@ -36,7 +37,13 @@ const typeDefs = gql`
     Account balance
     """
     balance: String
+    """
+    Date info
+    """
     datetime: Datetime
+    """
+    Additional info
+    """
     details: Details
   }
 `;
@@ -58,6 +65,11 @@ const resolvers = {
     },
     corredor: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/corredor';
+      const response = await promiseWrapper(url, args);
+      return JSON.parse(response);
+    },
+    idaan: async (parent, args, context) => {
+      const url = 'http://localhost:3000/api/ptycards/v2/idaan';
       const response = await promiseWrapper(url, args);
       return JSON.parse(response);
     },
