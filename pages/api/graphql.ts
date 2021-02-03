@@ -8,6 +8,7 @@ const typeDefs = gql`
     corredor(user: String!): Result!
     idaan(user: String!, name: String!): Result!
     ensa(user: String!, pass: String!): Result!
+    cableonda(user: String!): Result!
   }
   type Datetime {
     date: String!
@@ -84,6 +85,11 @@ const resolvers = {
     },
     ensa: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/ensa';
+      const response = await promiseWrapper(url, args);
+      return JSON.parse(response);
+    },
+    cableonda: async (parent, args, context) => {
+      const url = 'http://localhost:3000/api/ptycards/v2/cableonda';
       const response = await promiseWrapper(url, args);
       return JSON.parse(response);
     },
