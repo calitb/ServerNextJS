@@ -74,24 +74,35 @@ export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRe
   });
 };
 
-export const get = (baseURL: string, params: { [key: string]: any }, headers: Headers, cookiejar: CookieJar, callback: RequestCallback) => {
+const rejectUnauthorized = true;
+
+export const get = (baseURL: string, params: Record<string, any>, headers: Headers, cookiejar: CookieJar, callback: RequestCallback) => {
   const encodedParams = stringify(params);
   const url = `${baseURL}?${encodedParams}`;
   const j = cookiejar !== undefined ? (cookiejar ? cookiejar : request.jar()) : undefined;
-  request.get({ url, followAllRedirects: true, jar: j, headers }, (error: any, response: Response, body: any) => {
+  request.get({ rejectUnauthorized, url, followAllRedirects: true, jar: j, headers }, (error: any, response: Response, body: any) => {
+    if (error) {
+      console.log(url, error);
+    }
     callback(body, response, j);
   });
 };
 
-export const post = (url: string, form: { [key: string]: any } | string, headers: Headers, cookiejar: CookieJar, callback: RequestCallback, timeout = 60000) => {
+export const post = (url: string, form: Record<string, any> | string, headers: Headers, cookiejar: CookieJar, callback: RequestCallback, timeout = 60000) => {
   const isJSON = headers && headers['Content-Type'] === 'application/json';
   const j = cookiejar !== undefined ? (cookiejar ? cookiejar : request.jar()) : undefined;
   if (!isJSON) {
-    request.post({ url, form, followAllRedirects: true, jar: j, headers, timeout }, (error: any, response: Response, body: any) => {
+    request.post({ rejectUnauthorized, url, form, followAllRedirects: true, jar: j, headers, timeout }, (error: any, response: Response, body: any) => {
+      if (error) {
+        console.log(url, error);
+      }
       callback(body, response, j);
     });
   } else {
-    request.post({ url, body: form, followAllRedirects: true, jar: j, headers, json: isJSON }, (error: any, response: Response, body: any) => {
+    request.post({ rejectUnauthorized, url, body: form, followAllRedirects: true, jar: j, headers, json: isJSON }, (error: any, response: Response, body: any) => {
+      if (error) {
+        console.log(url, error);
+      }
       callback(body, response, j);
     });
   }
