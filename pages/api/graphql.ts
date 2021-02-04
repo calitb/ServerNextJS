@@ -49,6 +49,23 @@ const typeDefs = gql`
       pass: String!
     ): Result!
     """
+    Fetch Naturgy balance
+    """
+    naturgy(
+      """
+      Account Username
+      """
+      user: String!
+      """
+      Account password
+      """
+      pass: String!
+      """
+      Account number
+      """
+      account: String
+    ): Result!
+    """
     Fetch Cable Onda balance
     """
     cableonda(
@@ -133,6 +150,11 @@ const resolvers = {
     },
     ensa: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/ensa';
+      const response = await promiseWrapper(url, args);
+      return JSON.parse(response);
+    },
+    naturgy: async (parent, args, context) => {
+      const url = 'http://localhost:3000/api/ptycards/v2/naturgy';
       const response = await promiseWrapper(url, args);
       return JSON.parse(response);
     },
