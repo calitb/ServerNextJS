@@ -8,6 +8,8 @@ WORKDIR /usr/src
 # copy source files
 COPY . /usr/src
 
+RUN yarn --version
+
 # install dependencies
 RUN yarn
 
