@@ -1,4 +1,4 @@
-name: Deploy Production
+name: Deployment
 
 on:
   push:
@@ -11,12 +11,13 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v1
 
-      - name: Publish to Github Packages Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Docker build/push
+        uses: docker/build-push-action@v2
         with:
-          name: calitb/ServerNextJS/site
-          registry: docker.pkg.github.com
-          username: 'calitb'
-          password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: Dockerfile
-          tags: 'latest'
+          context: .
+          tags: docker.pkg.github.com/calitb/servernextjs/site:latest
+          platforms: linux/amd64,linux/arm64
+          push: true
