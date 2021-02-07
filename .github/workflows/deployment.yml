@@ -43,7 +43,8 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            ./APP/update_fe.sh
+            cd APP
+            ./update_fe.sh
           host: calitb.dev
           user: pi
           port: ${{ secrets.SSH_PORT }}
