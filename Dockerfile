@@ -1,19 +1,5 @@
-# base image
-FROM node
-
-# create & set working directory
-RUN mkdir -p /usr/src
-WORKDIR /usr/src
-
-# copy source files
-COPY . /usr/src
-
-RUN node --version
-
-# install dependencies
-RUN yarn install 
-
-# start app
-RUN yarn build
-EXPOSE 3000
-CMD yarn start
+FROM nginx:1.19-alpine
+COPY ./build /usr/share/nginx/html
+WORKDIR /usr/share/nginx
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
