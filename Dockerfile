@@ -9,9 +9,9 @@ WORKDIR /usr/src
 COPY . /usr/src
 
 # install dependencies
-RUN npm i
+RUN yarn 
 
 # start app
-RUN npm run build
+RUN yarn build
 EXPOSE 3000
-CMD npm start
+CMD yarn start
