@@ -7,7 +7,6 @@ WORKDIR /usr/src
 
 # copy source files
 COPY . /usr/src
-RUN rm -r node_modules
 
 # install dependencies
 RUN yarn
