@@ -1,17 +1,11 @@
-# base image
-FROM node
+FROM node:alpine
 
-# create & set working directory
-RUN mkdir -p /usr/src
-WORKDIR /usr/src
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-# copy source files
-COPY . /usr/src
+COPY package.json /usr/src/app
+COPY ./.next /usr/src/app/.next
+COPY ./node_modules /usr/src/app/node_modules
 
-# install dependencies
-RUN yarn
-
-# start app
-RUN yarn build
 EXPOSE 3000
-CMD yarn start
+CMD [ "yarn", "start" ]
