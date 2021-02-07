@@ -6,6 +6,7 @@ import {
   ResponseCallback,
   Split,
   curlHandler,
+  get,
   post,
   processResponseString,
   returnError,
@@ -14,8 +15,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { JSDOM } from 'jsdom';
 
-const URL1 = 'https://www.oficinavirtual.gasnaturalfenosa.com.pa/ovlatam-web/LoginAuthentication.gas';
-const URL2 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/MyOfficeHomeLatam.gas;';
+const REFERER = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/MyOfficeHomeLatam.gas';
+const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36';
+const HEADERS = { Referer: REFERER, 'User-Agent': USER_AGENT, Host: 'oficinavirtual.naturgy.com.pa' };
+
+const URL1 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/LoginAuthentication.gas';
+const URL2 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/MyOfficeHomeLatam.gas';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
   const { query, method, body } = req;
@@ -48,7 +53,7 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
     submitBtn: 'Entrar',
   };
 
-  post(URL1, body, undefined, undefined, (responseString1) => {
+  post(URL1, body, undefined, undefined, (responseString1, response, cookie) => {
     const result = processResponseString(responseString1, CONFIG1);
     const error = result.status == 'error';
 
@@ -56,25 +61,30 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
       return returnError(null, INVALID_NATURGY_CREDENTIALS_ERROR, lang, callback);
     }
 
-    fetchAccount(account, result.JSESSIONID, (_) => {
-      post(URL2 + result.JSESSIONID, undefined, undefined, undefined, (responseString2) => {
-        const dom = new JSDOM(responseString2);
-        const sourceCode = dom.serialize();
+    get('https://oficinavirtual.naturgy.com.pa/ovlatam-web/j_spring_security_check' + result.JSESSIONID, undefined, HEADERS, cookie, (resp, response, cookie2) => {
+      fetchAccount(account, result.JSESSIONID, (_) => {
+        get(URL2 + result.JSESSIONID, undefined, HEADERS, cookie2, (responseString2) => {
+          const dom = new JSDOM(responseString2, { pretendToBeVisual: true, referrer: REFERER, userAgent: USER_AGENT, cookieJar: cookie2 });
+          const sourceCode = dom.serialize();
 
-        const result2 = processResponseString(sourceCode, CONFIG2);
-        const error2 = result2.status == 'error';
+          const result2 = processResponseString(sourceCode, CONFIG2);
+          const error2 = result2.status == 'error';
+          debugger;
 
-        callback({
-          status: result2.status,
-          msg: result2.msg,
-          account: result2.account ? result2.account.substr(0, result2.account.length - 10) : '',
-          balance: result2.balance ? Number.parseFloat(result2.balance).toFixed(2) : null,
-          datetime: error2
-            ? null
-            : {
-                date: result2.fechaSaldo,
-                type: 'CURRENT',
-              },
+          console.log({ sourceCode });
+
+          callback({
+            status: result2.status,
+            msg: result2.msg,
+            account: result2.account ? result2.account.substr(0, result2.account.length - 10) : '',
+            balance: result2.balance ? Number.parseFloat(result2.balance).toFixed(2) : null,
+            datetime: error2
+              ? null
+              : {
+                  date: result2.fechaSaldo,
+                  type: 'CURRENT',
+                },
+          });
         });
       });
     });
