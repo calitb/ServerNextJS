@@ -166,7 +166,7 @@ const resolvers = {
   },
 };
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
+const apolloServer = new ApolloServer({ typeDefs, resolvers, playground: true });
 
 export const config = {
   api: {
