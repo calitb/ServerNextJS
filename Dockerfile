@@ -1,18 +1,11 @@
 FROM node:alpine
 
 RUN mkdir -p /usr/src/app
-ENV PORT 3000
-
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
-COPY yarn-lock.json /usr/src/app
-
-RUN npm install --production
-
-COPY . /usr/src/app
-
-RUN npm run build
+COPY ./.next /usr/src/app/.next
+COPY ./node_modules /usr/src/app/node_modules
 
 EXPOSE 3000
 CMD [ "yarn", "start" ]
