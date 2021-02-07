@@ -43,7 +43,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 'calitb.dev'
+          port: ${{ secrets.SSH_PORT }}
           username: 'pi'
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
           script: ./APP/update_fe.sh
