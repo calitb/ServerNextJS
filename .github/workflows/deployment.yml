@@ -45,4 +45,5 @@ jobs:
           host: 'calitb.dev'
           username: 'pi'
           key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: ./APP/update_fe.sh
