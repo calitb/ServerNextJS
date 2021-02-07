@@ -8,10 +8,10 @@ WORKDIR /usr/src
 # copy source files
 COPY . /usr/src
 
-RUN yarn --version
+RUN node --version
 
 # install dependencies
-RUN yarn
+RUN yarn install 
 
 # start app
 RUN yarn build
