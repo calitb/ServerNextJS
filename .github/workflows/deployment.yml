@@ -14,7 +14,7 @@ jobs:
       - name: Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: calitb/calitb.dev/site
+          name: calitb/ServerNextJS/site
           registry: docker.pkg.github.com
           username: 'calitb'
           password: ${{ secrets.GITHUB_TOKEN }}

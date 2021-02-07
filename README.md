@@ -1,3 +1,5 @@
+![Deployment](https://github.com/calitb/ServerNextJS/workflows/Deploy%20Production/badge.svg)
+
 # calitb.dev
 
 A marketing website for Terraformation!
@@ -14,4 +16,3 @@ Other scripts:
 
 - `yarn build` creates a production optimized build
 - `yarn start` starts the production build on port `3000`
-
