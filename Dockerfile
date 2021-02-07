@@ -8,6 +8,8 @@ WORKDIR /usr/src
 # copy source files
 COPY . /usr/src
 
+RUN npm install react-scripts -g --silent 
+
 # install dependencies
 RUN yarn 
 
