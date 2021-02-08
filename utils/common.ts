@@ -37,6 +37,13 @@ export type SplitJSON = {
   ignore?: boolean;
 };
 
+//TODO: dockerize
+//TODO: check for valid req.header.host, or validate authentication token
+//TODO: insertLog
+//TODO: services.register
+//TODO: Naturgy
+//TODO: Validar InAppPurchase
+
 type FETCH = (params: PTYCardsParams, callback: ResponseCallback) => void;
 type V2_TO_V1 = (inputV2: Record<string, any>) => Record<string, any>;
 
@@ -74,7 +81,7 @@ export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRe
   });
 };
 
-const rejectUnauthorized = true;
+const rejectUnauthorized = false;
 
 export const get = (baseURL: string, params: Record<string, any>, headers: Headers, cookiejar: CookieJar, callback: RequestCallback) => {
   const encodedParams = stringify(params);

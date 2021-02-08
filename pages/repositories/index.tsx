@@ -20,7 +20,7 @@ export default function Repositories({ repos }: Props) {
         <title>Repositories</title>
       </Head>
       <Navbar />
-      <main className="flex flex-wrap justify-center">
+      <main className="flex flex-wrap justify-center notch">
         {repos.map((r) => (
           <RepoListItemView key={r.name} repo={r} />
         ))}
@@ -36,7 +36,7 @@ interface ListItemProps {
 function RepoListItemView({ repo: { name, url, description } }: ListItemProps): JSX.Element {
   return (
     <Link href={url}>
-      <a target="_blank" title={name} className="my-2 mx-2 p-4 w-52 bg-gray-400 rounded-xl shadow-md space-y-2 border">
+      <a target="_blank" title={name} className="my-2 mx-2 p-4 w-5/12 sm:w-48 bg-gray-400 rounded-xl shadow-md space-y-2 border">
         <div className="text-center space-y-2">
           <p className="text-lg font-semibold">{name.replace('Sample-', '')}</p>
           <p className="text-sm">{description}</p>
