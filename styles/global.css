@@ -10,3 +10,8 @@ div#__next > div,
 div#__next > div > div {
   @apply flex flex-col min-h-screen;
 }
+
+.notch {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
