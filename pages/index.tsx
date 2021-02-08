@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Navbar from '@/components/Navbar';
 import styles from '@/styles/Home.module.css';
 
 interface Props {
@@ -12,12 +13,15 @@ export default function Home({ message }: Props) {
       <Head>
         <title>calitb.dev</title>
       </Head>
+      <Navbar />
       <div className={styles.container}>
-        <div className={styles.overlay}></div>
-        <div className="absolute h-full w-full p-16 uppercase">
-          <h1 className="text-5xl font-bold my-8">calitb.dev</h1>
-          <p className={`text-terminal-green opacity-80 ${styles['terminal-shadow']}`}>&gt; {message}</p>
-        </div>
+        <main>
+          <div className={styles.overlay}></div>
+          <div className="absolute h-full w-full p-16 uppercase">
+            <h1 className="text-5xl font-bold my-8">calitb.dev</h1>
+            <p className={`text-terminal-green opacity-80 ${styles['terminal-shadow']}`}>&gt; {message}</p>
+          </div>
+        </main>
       </div>
     </>
   );
