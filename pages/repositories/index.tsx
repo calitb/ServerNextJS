@@ -56,6 +56,10 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const response = await fetch('https://api.github.com/users/calitb/repos');
   const body = await response.json();
 
+  if (typeof body === 'object') {
+    console.log({ body });
+  }
+
   const repos: Repo[] = body.reduce((acum: Repo[], repo: any) => {
     if (repo.name.startsWith('Sample-')) {
       acum.push({
@@ -78,8 +82,6 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
     });
     repo.topics = (await response.json()).names;
   }
-
-  console.log(JSON.stringify(repos));
 
   return { props: { repos } };
 };
