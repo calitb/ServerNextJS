@@ -1,4 +1,4 @@
-![Deployment](https://github.com/calitb/ServerNextJS/workflows/Deploy%20Production/badge.svg)
+![Deployment](https://github.com/calitb/ServerNextJS/workflows/Deployment/badge.svg)
 
 # calitb.dev
 
