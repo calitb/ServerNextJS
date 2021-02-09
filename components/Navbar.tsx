@@ -30,7 +30,6 @@ export default function Navbar() {
   return (
     <>
       <Head>
-        <title>My page title</title>
         <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
       </Head>
       <nav className="notch bg-gray-800">
