@@ -43,7 +43,7 @@ function RepoListItemView({ repo: { name, url, description, topics } }: ListItem
           <p className="text-lg font-semibold">{name.replace('Sample-', '')}</p>
           <p className="text-sm">{description}</p>
         </div>
-        <div className="border-t-2 pt-2 text-center h-24">
+        <div className="border-t-2 pt-2 text-center h-32 sm:h-24">
           <p className="text-md font-semibold">Technologies</p>
           <p className="text-sm">{topics.join(', ')}</p>
         </div>
