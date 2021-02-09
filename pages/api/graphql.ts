@@ -4,122 +4,93 @@ import { get } from '@/utils/common';
 
 const typeDefs = gql`
   type Query {
-    """
-    Fetch metrobus balance
-    """
-    metrobus(
-      """
-      Card number
-      """
-      user: String!
-    ): Result!
-    """
-    Fetch prepaid Panapass balance
-    """
-    corredor(
-      """
-      Prepaid Panapass number
-      """
-      user: String!
-    ): Result!
-    """
-    Fetch IDAAN balance
-    """
-    idaan(
-      """
-      Account number
-      """
-      user: String!
-      """
-      Account owner
-      """
-      name: String!
-    ): Result!
-    """
-    Fetch ENSA balance
-    """
-    ensa(
-      """
-      Account number
-      """
-      user: String!
-      """
-      Account password
-      """
-      pass: String!
-    ): Result!
-    """
-    Fetch Naturgy balance
-    """
-    naturgy(
-      """
-      Account Username
-      """
-      user: String!
-      """
-      Account password
-      """
-      pass: String!
-      """
-      Account number
-      """
-      account: String
-    ): Result!
-    """
-    Fetch Cable Onda balance
-    """
-    cableonda(
-      """
-      Account number
-      """
-      user: String!
-    ): Result!
+    "Fetch metrobus balance"
+    metrobus("Card number" user: String!): MetrobusResult!
+    "Fetch prepaid Panapass balance"
+    corredor("Prepaid Panapass number" user: String!): CorredorResult!
+    "Fetch IDAAN balance"
+    idaan("Account number" user: String!, "Account owner" name: String!): IDAANResult!
+    "Fetch ENSA balance"
+    ensa("Account number" user: String!, "Account password" pass: String!): LightResult!
+    "Fetch Naturgy balance"
+    naturgy("Account Username" user: String!, "Account password" pass: String!, "Account number" account: String): LightResult!
+    "Fetch Cable Onda balance"
+    cableonda("Account number" user: String!): CableOndaResult!
   }
   type Datetime {
     date: String!
     time: String
     type: String!
   }
-  type Details {
-    model: String
-    ksi: String
-    fechalogueoString: String
-    waste: String
-    water: String
+  type MetrobusDetails {
+    model: String!
+    ksi: String!
+    fechalogueoString: String!
+  }
+  type IDAANDetails {
+    waste: String!
+    water: String!
+  }
+  type CableOndaDetails {
     montoVencido30: String
     montoVencido60: String
     montoActual: String
-    numCuenta: String
   }
-  type Result {
-    """
-    Status of the operation: 'success' or 'error'
-    """
+  type MetrobusResult {
+    "Status of the operation: 'success' or 'error'"
     status: String!
-    """
-    Debug error message
-    """
+    "Debug error message"
     msg: String
-    """
-    Error message
-    """
-    error_msg: String
-    """
-    Account number
-    """
-    account: String
-    """
-    Account balance
-    """
+    "Account balance"
     balance: String
-    """
-    Date info
-    """
+    "Date info"
     datetime: Datetime
-    """
-    Additional info
-    """
-    details: Details
+    "Additional info"
+    details: MetrobusDetails
+  }
+  type CorredorResult {
+    "Status of the operation: 'success' or 'error'"
+    status: String!
+    "Debug error message"
+    msg: String
+    "Account balance"
+    balance: String
+  }
+  type IDAANResult {
+    "Status of the operation: 'success' or 'error'"
+    status: String!
+    "Debug error message"
+    msg: String
+    "Account balance"
+    balance: String
+    "Additional info"
+    details: IDAANDetails
+  }
+  type LightResult {
+    "Status of the operation: 'success' or 'error'"
+    status: String!
+    "Debug error message"
+    msg: String
+    "Error message"
+    error_msg: String
+    "Account balance"
+    balance: String
+    "Date info"
+    datetime: Datetime
+    "Account number"
+    account: String
+  }
+  type CableOndaResult {
+    "Status of the operation: 'success' or 'error'"
+    status: String!
+    "Debug error message"
+    msg: String
+    "Account balance"
+    balance: String
+    "Date info"
+    datetime: Datetime
+    "Additional info"
+    details: CableOndaDetails
   }
 `;
 

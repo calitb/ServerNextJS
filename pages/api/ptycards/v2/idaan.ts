@@ -37,7 +37,6 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
 
     var details = null;
     var saldoTotal = null;
-    var datetime = null;
     if (!error) {
       const saldoAgua = Number.parseFloat(result.deudatotal_idaan.replace('B./', ''));
       const saldoBasura = Number.parseFloat(result.deudatotal_aseo.replace('B./', ''));
@@ -54,7 +53,6 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
       msg: result.msg,
       balance: saldoTotal,
       details: details,
-      datetime: datetime,
     });
   });
 };
