@@ -2,7 +2,7 @@
 
 # calitb.dev
 
-A marketing website for Terraformation!
+Personal site.
 
 ## Scripts
 
