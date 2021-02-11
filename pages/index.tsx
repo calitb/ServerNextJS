@@ -33,7 +33,5 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
     es: 'Esta página está en construcción',
   };
 
-  console.log({ locale });
-
-  return { props: { message: STRINGS[locale] ?? STRINGS['en'] } };
+  return { props: { message: STRINGS[locale] ?? STRINGS['es'] } };
 };
