@@ -32,10 +32,10 @@ export const fetchRepos = async (): Promise<Repo[]> => {
       logAPILimit(response);
     } catch (error) {
       if (error.response) {
-        reposBody = [];
         console.log('Error: ', error.response.statusText);
         logAPILimit(error.response);
       }
+      throw error;
     }
   }
 
@@ -73,11 +73,13 @@ const fetchTopics = async (apiUrl: string): Promise<string[]> => {
           password: process.env.GITHUB_CLIENT_SECRET,
         },
       });
+      logAPILimit(response);
       return response.data.names;
     } catch (error) {
       if (error.response) {
         console.log('Error: ', error.response.statusText);
-        return [];
+        logAPILimit(error.response);
+        throw error;
       }
     }
   }
