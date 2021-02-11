@@ -1,15 +1,9 @@
+import { Repo, fetchRepos } from 'api/github';
+
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-
-interface Repo {
-  name: string;
-  url: string;
-  apiUrl: string;
-  description: string;
-  topics: string[];
-}
 
 interface Props {
   repos: Repo[];
@@ -53,35 +47,7 @@ function RepoListItemView({ repo: { name, url, description, topics } }: ListItem
 }
 
 export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
-  const response = await fetch('https://api.github.com/users/calitb/repos');
-  const body = await response.json();
-
-  if (typeof body === 'object') {
-    console.log({ body });
-  }
-
-  const repos: Repo[] = body.reduce((acum: Repo[], repo: any) => {
-    if (repo.name.startsWith('Sample-')) {
-      acum.push({
-        name: repo.name,
-        url: repo.html_url,
-        apiUrl: repo.url,
-        description: repo.description,
-        topics: [],
-      });
-    }
-
-    return acum;
-  }, [] as Repo[]);
-
-  for (const repo of repos) {
-    const response = await fetch(repo.apiUrl + '/topics', {
-      headers: {
-        Accept: 'application/vnd.github.mercy-preview+json',
-      },
-    });
-    repo.topics = (await response.json()).names;
-  }
+  const repos = await fetchRepos();
 
   return { props: { repos } };
 };
