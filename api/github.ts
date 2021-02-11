@@ -17,6 +17,10 @@ export const fetchRepos = async (): Promise<Repo[]> => {
     reposBody = await response.json();
   }
 
+  if (typeof reposBody === 'object') {
+    console.log({ reposBody });
+  }
+
   const repos: Repo[] = reposBody.reduce((acum: Repo[], repo: any) => {
     if (repo.name.startsWith('Sample-')) {
       acum.push({
@@ -32,13 +36,13 @@ export const fetchRepos = async (): Promise<Repo[]> => {
   }, [] as Repo[]);
 
   for (const repo of repos) {
-    repo.topics = await fetchTopics(repo.url);
+    repo.topics = await fetchTopics(repo.apiUrl);
   }
 
   return repos;
 };
 
-const fetchTopics = async (apiUrl: string) => {
+const fetchTopics = async (apiUrl: string): Promise<string[]> => {
   if (process.env.USE_FIXTURE === 'true') {
     return topicsFixture.names;
   } else {
