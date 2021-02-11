@@ -9,19 +9,32 @@ export interface Repo {
   topics: string[];
 }
 
+const logAPILimit = (response?: AxiosResponse<any>) => {
+  if (response) {
+    console.log(`Remaining: ${response.headers['x-ratelimit-remaining']} of ${response.headers['x-ratelimit-limit']}`);
+  }
+};
+
 export const fetchRepos = async (): Promise<Repo[]> => {
   let reposBody = undefined;
   if (process.env.USE_FIXTURE === 'true') {
     reposBody = reposFixture;
   } else {
     try {
-      const response = await axios.get('https://api.github.com/users/calitb/repos');
+      const response = await axios({
+        url: 'https://api.github.com/users/calitb/repos',
+        auth: {
+          username: process.env.GITHUB_CLIENT_ID,
+          password: process.env.GITHUB_CLIENT_SECRET,
+        },
+      });
       reposBody = response.data;
+      logAPILimit(response);
     } catch (error) {
       if (error.response) {
         reposBody = [];
         console.log('Error: ', error.response.statusText);
-        console.log('Remaining: ', error.response.headers['x-ratelimit-remaining']);
+        logAPILimit(error.response);
       }
     }
   }
@@ -55,12 +68,15 @@ const fetchTopics = async (apiUrl: string): Promise<string[]> => {
       const response: AxiosResponse<{ names: string[] }> = await axios({
         headers: { Accept: 'application/vnd.github.mercy-preview+json' },
         url: apiUrl + '/topics',
+        auth: {
+          username: process.env.GITHUB_CLIENT_ID,
+          password: process.env.GITHUB_CLIENT_SECRET,
+        },
       });
       return response.data.names;
     } catch (error) {
       if (error.response) {
         console.log('Error: ', error.response.statusText);
-        console.log('Remaining: ', error.response.headers['x-ratelimit-remaining']);
         return [];
       }
     }
