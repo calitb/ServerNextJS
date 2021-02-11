@@ -41,7 +41,9 @@ function RepoListItemView({ repo: { name, url, description, topics } }: ListItem
             </div>
             <div id="techs" className="my-3 flex flex-wrap -m-1">
               {topics.map((t) => (
-                <span className="m-1 bg-gray-200 rounded-full px-2 font-bold text-xs leading-loose">{t}</span>
+                <span key={t} className="m-1 bg-gray-200 rounded-full px-2 font-bold text-xs leading-loose">
+                  {t}
+                </span>
               ))}
             </div>
           </div>
