@@ -16,7 +16,7 @@ export default function Repositories({ repos }: Props) {
         <title>Repositories</title>
       </Head>
       <Navbar />
-      <main className="flex flex-wrap justify-center notch">
+      <main className="flex flex-wrap justify-center notch bg-gray-100">
         {repos.map((r) => (
           <RepoListItemView key={r.name} repo={r} />
         ))}
@@ -31,18 +31,35 @@ interface ListItemProps {
 
 function RepoListItemView({ repo: { name, url, description, topics } }: ListItemProps): JSX.Element {
   return (
-    <Link href={url}>
-      <a target="_blank" title={name} className="flex flex-col justify-between my-2 mx-2 p-4 w-5/12 sm:w-48 bg-gray-400 rounded-xl shadow-md space-y-2 border">
-        <div className="text-center mb-2">
-          <p className="text-lg font-semibold">{name.replace('Sample-', '')}</p>
-          <p className="text-sm">{description}</p>
+    <div className="flex flex-col justify-center items-center my-2 p-4 w-10/12 sm:w-96">
+      <div className="h-full w-full bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <div className="flex flex-col justify-between h-full py-4 px-8">
+          <div>
+            <div id="summary" className="flex flex-col">
+              <h2 className="text-gray-700 font-semibold text-2xl tracking-wide mb-2">{name.replace('Sample-', '')}</h2>
+              <p className="text-gray-500 text-base">{description}</p>
+            </div>
+            <div id="techs" className="my-3 flex flex-wrap -m-1">
+              {topics.map((t) => (
+                <span className="m-1 bg-gray-200 rounded-full px-2 font-bold text-xs leading-loose">{t}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div id="button" className="py-2">
+              <Link href={url}>
+                <a
+                  target="_blank"
+                  className="block tracking-widest uppercase text-center shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded"
+                >
+                  Go to repo
+                </a>
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="border-t-2 pt-2 text-center h-32 sm:h-24">
-          <p className="text-md font-semibold">Technologies</p>
-          <p className="text-sm">{topics.join(', ')}</p>
-        </div>
-      </a>
-    </Link>
+      </div>
+    </div>
   );
 }
 
