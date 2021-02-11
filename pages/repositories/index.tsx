@@ -31,7 +31,7 @@ interface ListItemProps {
 
 function RepoListItemView({ repo: { name, url, description, topics } }: ListItemProps): JSX.Element {
   return (
-    <div className="flex flex-col justify-center items-center my-2 p-4 w-10/12 sm:w-96">
+    <div className="flex flex-col justify-center items-center my-2 p-4 w-10/12 sm:w-6/12 lg:w-96">
       <div className="h-full w-full bg-white shadow-md rounded-lg overflow-hidden mx-auto">
         <div className="flex flex-col justify-between h-full py-4 px-8">
           <div>
