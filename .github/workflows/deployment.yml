@@ -16,6 +16,9 @@ jobs:
 
       - name: build
         run: yarn build
+        env:
+          API_GITHUB_CLIENT_ID: ${{ secrets.API_GITHUB_CLIENT_ID }}
+          API_GITHUB_CLIENT_SECRET: ${{ secrets.API_GITHUB_CLIENT_SECRET }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1

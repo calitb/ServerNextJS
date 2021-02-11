@@ -24,8 +24,8 @@ export const fetchRepos = async (): Promise<Repo[]> => {
       const response = await axios({
         url: 'https://api.github.com/users/calitb/repos',
         auth: {
-          username: process.env.GITHUB_CLIENT_ID,
-          password: process.env.GITHUB_CLIENT_SECRET,
+          username: process.env.API_GITHUB_CLIENT_ID,
+          password: process.env.API_GITHUB_CLIENT_SECRET,
         },
       });
       reposBody = response.data;
@@ -69,8 +69,8 @@ const fetchTopics = async (apiUrl: string): Promise<string[]> => {
         headers: { Accept: 'application/vnd.github.mercy-preview+json' },
         url: apiUrl + '/topics',
         auth: {
-          username: process.env.GITHUB_CLIENT_ID,
-          password: process.env.GITHUB_CLIENT_SECRET,
+          username: process.env.API_GITHUB_CLIENT_ID,
+          password: process.env.API_GITHUB_CLIENT_SECRET,
         },
       });
       logAPILimit(response);
