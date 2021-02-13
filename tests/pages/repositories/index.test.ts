@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import { ReposProps, getStaticProps } from '@/pages/repositories';
+
 import { Repos } from '@/github/types/Repos';
 import { ReposViewModel } from '@/github/mappers/repos';
 import { githubGraphQlClient as client } from '@/github/client';
-import { getStaticProps } from '@/pages/repositories';
 
 jest.mock('@/github/client', () => {
   return {
@@ -110,7 +111,7 @@ test('gets repos from github', async () => {
     data: mock,
   });
 
-  const { props } = await getStaticProps({});
+  const { props } = (await getStaticProps({})) as { props: ReposProps; revalidate?: number | boolean };
 
   expect(props.repos).toEqual(result);
 });

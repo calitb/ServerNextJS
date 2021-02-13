@@ -5,11 +5,11 @@ import Navbar from '@/components/Navbar';
 import { ReposViewModel } from '@/github/mappers/repos';
 import { getRepos } from '@/github/api';
 
-interface Props {
+export interface ReposProps {
   repos: ReposViewModel[];
 }
 
-export default function Repositories({ repos }: Props): JSX.Element {
+export default function Repositories({ repos }: ReposProps): JSX.Element {
   return (
     <>
       <Head>
@@ -70,7 +70,7 @@ function RepoListItemView({ index, repo: { name, url, description, topics } }: L
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<ReposProps> = async () => {
   const repos = await getRepos();
 
   return { props: { repos } };
