@@ -156,7 +156,7 @@ export const strpos = (haystack: string, needle: string, offset = 0): number => 
 export const processResponseString = (responseString: string, splits: Split[]): Record<string, any> => {
   const results: Record<string, any> = { status: 'success' };
   let string = responseString;
-  for (const i = 0; i < splits.length; i++) {
+  for (let i = 0; i < splits.length; i++) {
     const split = splits[i];
     const start = split.start;
     const end = split.end;
@@ -192,7 +192,7 @@ export const processResponseJSONString = (responseString: string, splits: SplitJ
   } catch {
     //
   }
-  for (const i = 0; i < splits.length; i++) {
+  for (let i = 0; i < splits.length; i++) {
     const split = splits[i];
     const field = split.field;
     const required = split.required;
