@@ -70,7 +70,7 @@ function RepoListItemView({ index, repo: { name, url, description, topics } }: L
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const repos = await getRepos();
 
   return { props: { repos } };
