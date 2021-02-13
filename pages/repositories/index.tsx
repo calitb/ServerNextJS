@@ -1,4 +1,4 @@
-import { Repo, fetchRepos } from 'api/github';
+import { Repo, fetchRepos } from '@/github/rest';
 
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
