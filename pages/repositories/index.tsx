@@ -1,12 +1,12 @@
-import { Repo, fetchRepos } from 'api/github';
-
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import { ReposViewModel } from '@/github/mappers/repos';
+import { getRepos } from '@/github/api';
 
 interface Props {
-  repos: Repo[];
+  repos: ReposViewModel[];
 }
 
 export default function Repositories({ repos }: Props) {
@@ -26,7 +26,7 @@ export default function Repositories({ repos }: Props) {
 }
 
 interface ListItemProps {
-  repo: Repo;
+  repo: ReposViewModel;
   index: number;
 }
 
@@ -71,7 +71,7 @@ function RepoListItemView({ index, repo: { name, url, description, topics } }: L
 }
 
 export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
-  const repos = await fetchRepos();
+  const repos = await getRepos();
 
   return { props: { repos } };
 };
