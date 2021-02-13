@@ -35,8 +35,8 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
     const result = processResponseJSONString(responseString, CONFIG);
     const error = result.status == 'error';
 
-    var details = null;
-    var saldoTotal = null;
+    let details = null;
+    let saldoTotal = null;
     if (!error) {
       const saldoAgua = Number.parseFloat(result.deudatotal_idaan.replace('B./', ''));
       const saldoBasura = Number.parseFloat(result.deudatotal_aseo.replace('B./', ''));

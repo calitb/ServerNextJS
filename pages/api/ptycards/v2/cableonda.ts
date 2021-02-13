@@ -42,9 +42,9 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
       const result2 = processResponseString(responseString, CONFIG2);
       const error1 = result.status == 'error';
       const error2 = result2.status == 'error';
-      var error = error1;
-      var msg = result.msg;
-      var facturaAlDia = false;
+      let error = error1;
+      let msg = result.msg;
+      let facturaAlDia = false;
 
       if (result.msg == 'Value for fechaVencimiento not found') {
         //factura al dia

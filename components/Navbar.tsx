@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function Navbar() {
+export default function Navbar(): JSX.Element {
   const router = useRouter();
 
   const openMenu = () => {

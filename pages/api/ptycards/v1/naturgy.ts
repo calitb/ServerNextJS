@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Record<string, a
   const { username, password, device, version, lang } = inParams;
 
   const accountData = username.split(',');
-  var accountNumber = null;
+  let accountNumber = null;
   if (accountData.length == 2) {
     accountNumber = accountData[1];
   }

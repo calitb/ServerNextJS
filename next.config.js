@@ -1,3 +1,3 @@
-module.exports = (phase, { defaultConfig }) => {
+module.exports = () => {
   return {};
 };
