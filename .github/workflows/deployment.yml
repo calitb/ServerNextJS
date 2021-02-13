@@ -19,8 +19,7 @@ jobs:
       - name: build and run e2e
         run: yarn e2e
         env:
-          API_GITHUB_CLIENT_ID: ${{ secrets.API_GITHUB_CLIENT_ID }}
-          API_GITHUB_CLIENT_SECRET: ${{ secrets.API_GITHUB_CLIENT_SECRET }}
+          API_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.API_GITHUB_PERSONAL_ACCESS_TOKEN }}
 
       - name: Set up Docker Buildx
         if: github.ref == 'refs/heads/main'
