@@ -17,8 +17,8 @@ export default function Repositories({ repos }: Props) {
       </Head>
       <Navbar />
       <main className="flex flex-wrap justify-center notch bg-gray-100">
-        {repos.map((r) => (
-          <RepoListItemView key={r.name} repo={r} />
+        {repos.map((r, index) => (
+          <RepoListItemView key={r.name} repo={r} index={index} />
         ))}
       </main>
     </>
@@ -27,21 +27,26 @@ export default function Repositories({ repos }: Props) {
 
 interface ListItemProps {
   repo: Repo;
+  index: number;
 }
 
-function RepoListItemView({ repo: { name, url, description, topics } }: ListItemProps): JSX.Element {
+function RepoListItemView({ index, repo: { name, url, description, topics } }: ListItemProps): JSX.Element {
   return (
-    <div className="flex flex-col justify-center items-center my-2 p-4 w-10/12 sm:w-6/12 lg:w-96">
+    <div id={`card-${index}`} className="flex flex-col justify-center items-center my-2 p-4 w-10/12 sm:w-6/12 lg:w-96">
       <div className="h-full w-full bg-white shadow-md rounded-lg overflow-hidden mx-auto">
         <div className="flex flex-col justify-between h-full py-4 px-8">
           <div>
             <div id="summary" className="flex flex-col">
-              <h2 className="text-gray-700 font-semibold text-2xl tracking-wide mb-2">{name.replace('Sample-', '')}</h2>
-              <p className="text-gray-500 text-base">{description}</p>
+              <h2 id="name" className="text-gray-700 font-semibold text-2xl tracking-wide mb-2">
+                {name.replace('Sample-', '')}
+              </h2>
+              <p id="description" className="text-gray-500 text-base">
+                {description}
+              </p>
             </div>
             <div id="techs" className="my-3 flex flex-wrap -m-1">
-              {topics.map((t) => (
-                <span key={t} className="m-1 bg-gray-200 rounded-full px-2 font-bold text-xs leading-loose">
+              {topics.map((t, index) => (
+                <span id={`tech-${index}`} key={t} className="m-1 bg-gray-200 rounded-full px-2 font-bold text-xs leading-loose">
                   {t}
                 </span>
               ))}
