@@ -85,7 +85,7 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
             account: params.account || result.account,
           };
           post(URL4, body4, HEADERS4, cookiejar3, (responseString4, responseHeaders4, cookiejar4) => {
-            get(URL5, null, HEADERS, cookiejar4, (responseString5, responseHeaders5, cookiejar5) => {
+            get(URL5, null, HEADERS, cookiejar4, (responseString5) => {
               const result2 = processResponseString(responseString5, CONFIG5);
               const error2 = result2.status == 'error' || result2.fechaVencimiento.length < 5;
 
@@ -128,9 +128,9 @@ const autenticated = (cookiejar: any): boolean => {
 // turns "29 de agosto de 2019" into "30/04/2018"
 const formatDate = (input: string): string => {
   const tokens = input.split(' de ');
-  var day = tokens[0];
-  var month = tokens[1].toUpperCase();
-  var year = tokens[2];
+  const day = tokens[0];
+  let month = tokens[1].toUpperCase();
+  const year = tokens[2];
 
   switch (month) {
     case 'ENERO':

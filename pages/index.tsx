@@ -7,7 +7,7 @@ interface Props {
   message: string;
 }
 
-export default function Home({ message }: Props) {
+export default function Home({ message }: Props): JSX.Element {
   return (
     <>
       <Head>

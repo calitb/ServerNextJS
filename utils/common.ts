@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import * as request from 'request';
 
 import { CookieJar, Headers, Response } from 'request';
@@ -53,7 +55,7 @@ const defaultConverter: V2_TO_V1 = (inputV2: Record<string, any>) => {
 
 export const curlHandler = (params: PTYCardsParams, fetch: FETCH, req: NextApiRequest, res: NextApiResponse<Record<string, any>>, converter = defaultConverter) => {
   const { method } = req;
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     switch (method) {
       case 'GET':
         fetch(params, (body: Record<string, any>) => {
@@ -116,11 +118,11 @@ export const post = (url: string, form: Record<string, any> | string, headers: H
 };
 
 export const getField = (_string: string, begin: string, end: string, field: string, offset = 0): Record<string, any> => {
-  var pos = strpos(_string, begin, offset);
+  let pos = strpos(_string, begin, offset);
   if (pos === -1) {
     return { status: 'error', msg: `Value for ${field} not found` };
   } else {
-    var string = _string.substring(pos + begin.length);
+    const string = _string.substring(pos + begin.length);
     pos = strpos(string, end);
     const value = string.substring(0, pos).trim();
 
@@ -153,8 +155,8 @@ export const strpos = (haystack: string, needle: string, offset = 0): number => 
 
 export const processResponseString = (responseString: string, splits: Split[]): Record<string, any> => {
   const results: Record<string, any> = { status: 'success' };
-  var string = responseString;
-  for (var i = 0; i < splits.length; i++) {
+  let string = responseString;
+  for (let i = 0; i < splits.length; i++) {
     const split = splits[i];
     const start = split.start;
     const end = split.end;
@@ -184,11 +186,13 @@ export const processResponseString = (responseString: string, splits: Split[]): 
 
 export const processResponseJSONString = (responseString: string, splits: SplitJSON[]): Record<string, any> => {
   const results: Record<string, any> = { status: 'success' };
-  var json: Record<string, any> = {};
+  let json: Record<string, any> = {};
   try {
     json = JSON.parse(responseString);
-  } catch {}
-  for (var i = 0; i < splits.length; i++) {
+  } catch {
+    //
+  }
+  for (let i = 0; i < splits.length; i++) {
     const split = splits[i];
     const field = split.field;
     const required = split.required;

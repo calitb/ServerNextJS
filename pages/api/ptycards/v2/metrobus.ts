@@ -62,8 +62,8 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
 // 17:38 -> 05:38 PM
 const militarToStandardTime = (militarTime: string): string => {
   const parts = militarTime.split(':');
-  var hour = Number.parseInt(parts[0]);
-  var am = 'AM';
+  let hour = Number.parseInt(parts[0]);
+  let am = 'AM';
   if (hour > 12) {
     hour = hour - 12;
     am = 'PM';

@@ -9,7 +9,7 @@ interface Props {
   repos: ReposViewModel[];
 }
 
-export default function Repositories({ repos }: Props) {
+export default function Repositories({ repos }: Props): JSX.Element {
   return (
     <>
       <Head>

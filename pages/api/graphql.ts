@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { get } from '@/utils/common';
 
 const typeDefs = gql`
