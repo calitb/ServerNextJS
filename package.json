@@ -10,6 +10,7 @@
     "build:start": "yarn build && yarn start",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
+    "test:ci": "jest --coverage",
     "test:dev": "jest --watch",
     "cy:run": "cypress run",
     "cy": "cypress open",

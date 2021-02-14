@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import { ReposProps, getStaticProps } from '@/pages/repositories';
 
 import { Repos } from '@/github/types/Repos';
