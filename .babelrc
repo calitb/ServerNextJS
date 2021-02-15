@@ -1,5 +1,13 @@
 {
   "presets": [
     "next/babel"
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": []
+    },
+    "e2e": {
+      "plugins": ["istanbul"]
+    }
+  }
 }

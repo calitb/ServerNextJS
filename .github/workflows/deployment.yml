@@ -23,8 +23,7 @@ jobs:
       - name: unit tests
         run: yarn test:ci
 
-      - name: gets coverage
-        if: github.ref == 'refs/heads/main'
+      - name: gets unit tests coverage
         id: coverage
         run: |
           coverage=`sed -n 47p coverage/lcov-report/index.html | awk -F '>' '{print $2}' | awk -F '%' '{print $1}'`
@@ -37,8 +36,7 @@ jobs:
             echo "::set-output name=COLOR::orange"
           fi
 
-      - name: generate coverage badge
-        if: github.ref == 'refs/heads/main'
+      - name: generate unit tests coverage badge
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
@@ -47,12 +45,39 @@ jobs:
           label: coverage
           message: '${{steps.coverage.outputs.COVERAGE}}'
           color: '${{steps.coverage.outputs.COLOR}}'
-          cacheSeconds: 300 
+          cacheSeconds: 300
 
       - name: build and run e2e
-        run: yarn e2e
+        run: |
+          rm -r coverage
+          yarn e2e
+          yarn e2e:report
         env:
           API_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.API_GITHUB_PERSONAL_ACCESS_TOKEN }}
+
+      - name: gets e2e coverage
+        id: e2e_coverage
+        run: |
+          coverage=`sed -n 47p coverage/lcov-report/index.html | awk -F '>' '{print $2}' | awk -F '%' '{print $1}'`
+          echo "::set-output name=COVERAGE::$coverage"
+          if (( $(echo "$value <= 50" | bc -l) )) ; then
+            echo "::set-output name=COLOR::red"
+          elif (( $(echo "$value > 80" | bc -l) )); then
+            echo "::set-output name=COLOR::green"
+          else
+            echo "::set-output name=COLOR::orange"
+          fi
+
+      - name: generate e2e coverage badge
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: ${{ secrets.GIST_ID }}
+          filename: calitbdev-e2e-coverage.json
+          label: e2e-coverage
+          message: '${{steps.e2e_coverage.outputs.COVERAGE}}'
+          color: '${{steps.e2e_coverage.outputs.COLOR}}'
+          cacheSeconds: 300
 
       - name: Set up Docker Buildx
         if: github.ref == 'refs/heads/main'
