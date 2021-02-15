@@ -25,7 +25,6 @@ jobs:
 
       - name: unit tests
         id: gets coverage
-        if: github.ref == 'refs/heads/main'
         run: |
           coverage=`sed -n 47p coverage/lcov-report/index.html | awk -F '>' '{print $2}' | awk -F '%' '{print $1}'`
           echo "::set-output name=COVERAGE::$coverage"
@@ -38,7 +37,6 @@ jobs:
           fi
 
       - name: generate coverage badge
-        if: github.ref == 'refs/heads/main'
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
