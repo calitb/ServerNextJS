@@ -48,7 +48,7 @@ jobs:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: ${{ secrets.GIST_ID }}
           filename: calitbdev-test-coverage.json
-          label: test-coverage
+          label: TestCoverage
           message: '${{steps.test_coverage.outputs.COVERAGE}}%'
           color: '${{steps.test_coverage.outputs.COLOR}}'
           cacheSeconds: 300
