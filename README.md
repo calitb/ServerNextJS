@@ -1,6 +1,5 @@
 ![Deployment](https://github.com/calitb/ServerNextJS/workflows/Deployment/badge.svg)
-![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-coverage.json)
-![E2E-Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-e2e-coverage.json)
+![Test-Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-test-coverage)
 
 # calitb.dev
 
@@ -29,7 +28,26 @@ Other scripts:
 - `yarn build` creates a production optimized build
 - `yarn start` starts the production build on port `3000`
 
-### Github GraphQL Commands
+### Linter
+
+```bash
+yarn lint
+```
+
+### Unit Test
+
+```bash
+yarn test
+```
+
+### e2e
+
+```bash
+yarn build:start
+yarn cy
+```
+
+## Github GraphQL Commands
 
 To generate `TypeScript` interface definitions based on the GraphQL types. The the following command:
 
