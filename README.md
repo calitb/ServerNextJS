@@ -1,6 +1,6 @@
 ![Deployment](https://github.com/calitb/ServerNextJS/workflows/Deployment/badge.svg)
-![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/738e4db4acb1a0b57dc62d598c48185d/raw/calitbdev-coverage.json)
-![E2E-Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/738e4db4acb1a0b57dc62d598c48185d/raw/calitbdev-e2e-coverage.json)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-coverage.json)
+![E2E-Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-e2e-coverage.json)
 
 # calitb.dev
 
