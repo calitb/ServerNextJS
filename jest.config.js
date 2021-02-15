@@ -17,4 +17,6 @@ module.exports = {
     '@/styles/(.*)': '<rootDir>/styles/$1',
   },
   setupFilesAfterEnv: [],
+  coverageDirectory: 'jest-coverage',
+  coverageReporters: ['json'],
 };
