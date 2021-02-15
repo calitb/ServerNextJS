@@ -15,7 +15,7 @@
     "cy": "cypress open",
     "cy:run": "cypress run",
     "e2e": "NODE_ENV=e2e start-server-and-test build:start http://localhost:3000 cy:run",
-    "test:coverage": "rm -rf .nyc_output && rm -rf cypress-coverage && rm -rf jest-coverage && rm -rf coverage && yarn test:ci && yarn e2e && node ./scripts/mergeCoverage.js",
+    "test:coverage": "rm -rf .nyc_output cypress-coverage jest-coverage coverage && yarn test:ci && yarn e2e && node ./scripts/mergeCoverage.js",
     "test:coverage:report": "npx nyc report --reporter=text",
     "test:coverage:percentage": "sed -n 47p coverage/lcov-report/index.html | awk -F '>' '{print $2}' | awk -F '%' '{print $1}'"
   },

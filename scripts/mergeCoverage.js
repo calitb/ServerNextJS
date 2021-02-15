@@ -1,6 +1,8 @@
 /**
  * This script merges the coverage reports from Cypress and Jest into a single one,
  * inside the "coverage" folder
+ *
+ * Source: https://rafaelalmeidatk.com/blog/merging-coverage-reports-from-jest-and-cypress
  */
 const { execSync } = require('child_process');
 const fs = require('fs-extra');

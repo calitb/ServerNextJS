@@ -1,5 +1,5 @@
 ![Deployment](https://github.com/calitb/ServerNextJS/workflows/Deployment/badge.svg)
-![Test-Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-test-coverage)
+![Test-Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/calitb/dc36939fa3358ff1c7e10fe0f91cb874/raw/calitbdev-test-coverage.json)
 
 # calitb.dev
 
