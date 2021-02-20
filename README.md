@@ -15,6 +15,16 @@ API_GITHUB_PERSONAL_ACCESS_TOKEN=
 
 Copy the `.env.local.example` file provided in the codebase and rename as `.env.local`. The file contains the key of the required Github variables. Fill in the values used for local development.
 
+## Contentful Integration
+
+In order to connect to Contentful and fetch content, the following environment variables must be declared/exported:
+
+```bash
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_ACCESS_TOKEN=
+CONTENTFUL_ENVIRONMENT=
+```
+
 ## Scripts
 
 To start the development server with hot reloading on `http://localhost:3000`:
@@ -84,5 +94,13 @@ So to generate the types, execute:
 
 ```bash
 export GITHUB_AUTHORIZATION="Authorization: Bearer YOUR_GITHUB_PERSONAL_TOKEN"
-yarn run apollo client:codegen --header $GITHUB_AUTHORIZATION --endpoint=https://api.github.com/graphql --target=typescript  --includes='./github/queries/**.ts' --no-addTypename --globalTypesFile=./github/types/globals.ts --outputFlat  './github/types'
+yarn run apollo client:codegen --header $GITHUB_AUTHORIZATION --endpoint='https://api.github.com/graphql' --target=typescript  --includes='./github/queries/**.ts' --no-addTypename --globalTypesFile=./github/types/globals.ts --outputFlat  './github/types'
+```
+
+## Contentful GraphQL Commands
+
+To generate the types, execute:
+
+```bash
+yarn run apollo client:codegen --endpoint='https://graphql.contentful.com/content/v1/spaces/axvknqtceyib/environments/master?access_token=8BgW12lJ3DTiD0h5Tq5qq4rL7bOKPFiZlXX3Noci5Bo' --target=typescript  --includes='./contentful/queries/**.ts' --no-addTypename --globalTypesFile=./contentful/types/globals.ts --outputFlat  './contentful/types'
 ```

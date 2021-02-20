@@ -6,6 +6,12 @@ module.exports = {
       colors: {
         'terminal-green': 'rgb(128, 255, 128)',
       },
+      width: {
+        75: '18.75rem',
+      },
+      height: {
+        110: '27.5rem',
+      },
     },
   },
   variants: {

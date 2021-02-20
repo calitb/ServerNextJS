@@ -13,6 +13,7 @@ module.exports = {
     '@/components/(.*)': '<rootDir>/components/$1',
     '@/pages/(.*)': '<rootDir>/pages/$1',
     '@/github/(.*)': '<rootDir>/github/$1',
+    '@/contentful/(.*)': '<rootDir>/contentful/$1',
     '@/utils/(.*)': '<rootDir>/utils/$1',
     '@/styles/(.*)': '<rootDir>/styles/$1',
   },
