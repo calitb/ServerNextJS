@@ -17,7 +17,7 @@ export default function Pelis({ movies }: MoviesProps): JSX.Element {
       </Head>
       <Navbar />
       <main className="flex flex-wrap justify-center notch ">
-        <div className="flex flex-wrap flex--movie w-full">
+        <div className="flex justify-center flex-wrap flex--movie w-full">
           {movies.map((m, index) => (
             <MovieListItemView key={m.name} movie={m} index={index} />
           ))}
@@ -52,9 +52,9 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
             </Link>
             <p className="text-sm text-gray-400">Pass: {downloadPassword}</p>
           </div>
-          <div className="flex items-end">
+          <div className="flex items-center">
             <Link href={url}>
-              <a target="_blank" className="flex justify-center items-center text-xs text-center font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700">
+              <a target="_blank" className="w-16 flex justify-center items-center text-xs text-center font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700">
                 Info
               </a>
             </Link>
