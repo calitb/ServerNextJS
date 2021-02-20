@@ -37,7 +37,7 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
     <div id={`card-${index}`} className="w-75 rounded overflow-hidden shadow-lg m-4">
       <img className="w-75 h-110" src={image} alt={`${name} movie poster`} />
 
-      <div className="flex flex-col px-4 py-2 bg-gray-800 h-40">
+      <div className="flex flex-col justify-between px-4 py-2 bg-gray-800 h-40">
         <div className="font-bold text-gray-200">
           <h4 className="text-xs mb-2">{new Date(date).toLocaleDateString()}</h4>
           <div className="text-xl mb-2">{name}</div>
