@@ -17,7 +17,7 @@ export default function Pelis({ movies }: MoviesProps): JSX.Element {
       </Head>
       <Navbar />
       <main className="flex flex-wrap justify-center notch ">
-        <div className="flex flex-wrap flex--movie w-full">
+        <div className="flex justify-center flex-wrap flex--movie w-full">
           {movies.map((m, index) => (
             <MovieListItemView key={m.name} movie={m} index={index} />
           ))}
@@ -37,23 +37,28 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
     <div id={`card-${index}`} className="w-75 rounded overflow-hidden shadow-lg m-4">
       <img className="w-75 h-110" src={image} alt={`${name} movie poster`} />
 
-      <div className="flex flex-col justify-between px-4 py-2 bg-gray-800 h-40">
-        <div>
-          <h4 className="font-bold text-xs mb-2 text-gray-200">{new Date(date).toLocaleDateString()}</h4>
-          <Link href={url}>
-            <a target="_blank" className="block font-bold text-xl mb-2 text-gray-200 hover:text-gray-100">
-              {name}
-            </a>
-          </Link>
+      <div className="flex flex-col px-4 py-2 bg-gray-800 h-40">
+        <div className="font-bold text-gray-200">
+          <h4 className="text-xs mb-2">{new Date(date).toLocaleDateString()}</h4>
+          <div className="text-xl mb-2">{name}</div>
         </div>
 
-        <div>
-          <Link href={downloadUrl}>
-            <a target="_blank" className="text-sm text-gray-400 hover:text-gray-100">
-              Download
-            </a>
-          </Link>
-          <p className="text-sm text-gray-400">Pass: {downloadPassword}</p>
+        <div className="flex justify-between">
+          <div className="flex flex-col text-md text-gray-400 ">
+            <Link href={downloadUrl}>
+              <a target="_blank" className="hover:text-gray-100 underline">
+                Download
+              </a>
+            </Link>
+            <p>Pass: {downloadPassword}</p>
+          </div>
+          <div className="flex items-center">
+            <Link href={url}>
+              <a target="_blank" className="w-16 flex justify-center items-center text-xs text-center font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700">
+                Info
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
