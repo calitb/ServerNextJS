@@ -68,6 +68,16 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
 
+      - name: generate .env.local file
+        run: |
+          echo "CONTENTFUL_SPACE_ID=$CONTENTFUL_SPACE_ID" >> .env.local
+          echo "CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN" >> .env.local
+          echo "CONTENTFUL_ENVIRONMENT=$CONTENTFUL_ENVIRONMENT" >> .env.local
+        env:
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+          CONTENTFUL_ENVIRONMENT: ${{ secrets.CONTENTFUL_ENVIRONMENT }}
+
       - name: Docker build/push
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v2
