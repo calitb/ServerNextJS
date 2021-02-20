@@ -45,19 +45,23 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
 
         <div className="flex justify-between">
           <div className="flex flex-col text-md text-gray-400 ">
-            <Link href={downloadUrl}>
-              <a target="_blank" className="hover:text-gray-100 underline">
-                Download
-              </a>
-            </Link>
-            <p>Pass: {downloadPassword}</p>
+            {downloadUrl && (
+              <Link href={downloadUrl}>
+                <a target="_blank" className="hover:text-gray-100 underline">
+                  Download
+                </a>
+              </Link>
+            )}
+            {downloadUrl && downloadPassword && <p>Pass: {downloadPassword}</p>}
           </div>
           <div className="flex items-center">
-            <Link href={url}>
-              <a target="_blank" className="w-16 flex justify-center items-center text-xs text-center font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700">
-                Info
-              </a>
-            </Link>
+            {url && (
+              <Link href={url}>
+                <a target="_blank" className="w-16 flex justify-center items-center text-xs text-center font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700">
+                  Info
+                </a>
+              </Link>
+            )}
           </div>
         </div>
       </div>

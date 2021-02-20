@@ -5,9 +5,9 @@ export interface MoviesPageView {
   date: string;
   name: string;
   image: string;
-  url: string;
-  downloadUrl: string;
-  downloadPassword: string;
+  url?: string;
+  downloadUrl?: string;
+  downloadPassword?: string;
 }
 
 export default class MoviesMapper extends MapperBase<MoviesPage, MoviesPageView[]> {
@@ -18,9 +18,9 @@ export default class MoviesMapper extends MapperBase<MoviesPage, MoviesPageView[
       date: date ?? '',
       name: name ?? '',
       image: image.url ?? '',
-      url: url ?? '',
-      downloadUrl: downloadUrl ?? '',
-      downloadPassword: downloadPassword ?? '',
+      url: url,
+      downloadUrl: downloadUrl,
+      downloadPassword: downloadPassword,
     }));
 
     return result;
