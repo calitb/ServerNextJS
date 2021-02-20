@@ -22,6 +22,7 @@
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
       "@/github/*": ["github/*"],
+      "@/contentful/*": ["contentful/*"],
       "@/utils/*": ["utils/*"],
       "@/styles/*": ["styles/*"]
     }

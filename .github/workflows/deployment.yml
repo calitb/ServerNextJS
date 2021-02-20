@@ -26,6 +26,9 @@ jobs:
           yarn test:coverage:report
         env:
           API_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.API_GITHUB_PERSONAL_ACCESS_TOKEN }}
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+          CONTENTFUL_ENVIRONMENT: ${{ secrets.CONTENTFUL_ENVIRONMENT }}
 
       - name: gets coverage
         if: github.ref == 'refs/heads/main'
