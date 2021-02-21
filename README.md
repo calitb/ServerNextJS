@@ -102,5 +102,49 @@ yarn run apollo client:codegen --header $GITHUB_AUTHORIZATION --endpoint='https:
 To generate the types, execute:
 
 ```bash
-yarn run apollo client:codegen --endpoint='https://graphql.contentful.com/content/v1/spaces/axvknqtceyib/environments/master?access_token=8BgW12lJ3DTiD0h5Tq5qq4rL7bOKPFiZlXX3Noci5Bo' --target=typescript  --includes='./contentful/queries/**.ts' --no-addTypename --globalTypesFile=./contentful/types/globals.ts --outputFlat  './contentful/types'
+yarn run apollo client:codegen --endpoint='https://graphql.contentful.com/content/v1/spaces/YOUR_SPACE_ID/environments/YOUR_ENVIRONMENT?access_token=YOUR_TOKEN' --target=typescript  --includes='./contentful/queries/**.ts' --no-addTypename --globalTypesFile=./contentful/types/globals.ts --outputFlat  './contentful/types'
+```
+
+### Contentful Migrations and Environment Setup
+
+In order to run predictable and repeatable e2e UI tests, we must have an environment with predetermined seed data.
+
+Every content model that is created in a production environment **must have** a code-first counterpart.
+
+Content types are created using contentful management API, script that are placed in `./contentful/migrations` and each new migration file **must be added into the `setup.sh` file**
+
+Seed data files are place in `./contentful/seed` and must also be individually referenced inside `setup.sh`
+
+There is no strict convention for naming the files, but generally they should map to individual page.
+
+To fully initialize a contentful environment, simply run the following from the root of the source code directory:
+
+```bash
+./contentful/environment/setup.sh
+```
+
+The following three environment variables must be **exported**:
+
+```bash
+export CONTENTFUL_SPACE_ID=<target space id>
+export CONTENTFUL_TARGET_ENVIRONMENT=e2e
+export MANAGEMENT_ACCESS_TOKEN=<management api token>
+```
+
+#### Troubleshooting.
+
+Make sure you have at least a blank space in Contentful called `tabula-rasa`.
+
+Make sure the file `tsconfig.json` contains `"module": "CommonJS"` before running the migrations.
+
+## Continuous Deployment
+
+The file `./update_fe.sh` is required in the deployment machine as specified in the `./github/workflows/deployment.yml` file
+
+```
+docker pull ghcr.io/calitb/site:latest
+docker image prune -f
+docker stop calitb_fe
+docker rm calitb_fe
+docker-compose up -d
 ```
