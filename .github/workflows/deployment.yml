@@ -121,6 +121,15 @@ jobs:
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
           CONTENTFUL_ENVIRONMENT: ${{ secrets.CONTENTFUL_ENVIRONMENT }}
 
+      - name: Cache Docker
+        if: github.ref == 'refs/heads/main'
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+        with:
+          key: my-docker-cache-{hash}
+          restore-keys: |
+            my-docker-cache-
+
       - name: Docker build/push
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v2
