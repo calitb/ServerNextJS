@@ -12,7 +12,7 @@ export interface MoviesProps {
 export default function Pelis({ movies }: MoviesProps): JSX.Element {
   return (
     <>
-      <Meta title="Movies Schedule" description="Schedule for movies" url="/movies" image="https://i.pinimg.com/originals/6b/4a/73/6b4a738dd051ec314307435efa574807.png" />
+      <Meta title="Next Movies" description="Schedule for upcoming watch-together movies" url="/movies" />
       <Navbar />
       <main className="flex flex-wrap justify-center notch ">
         <div className="flex justify-center flex-wrap flex--movie w-full">

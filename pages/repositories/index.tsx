@@ -12,7 +12,7 @@ export interface ReposProps {
 export default function Repositories({ repos }: ReposProps): JSX.Element {
   return (
     <>
-      <Meta title="Repositories" description="Demo Repositories" url="/repositories" image="https://git-scm.com/images/logos/downloads/Git-Icon-Black.png" />
+      <Meta title="Repositories" description="Sample Repositories for different technologies" url="/repositories" />
       <Navbar />
       <main className="flex flex-wrap justify-center notch bg-gray-100">
         {repos.map((r, index) => (

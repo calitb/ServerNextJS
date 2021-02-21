@@ -13,7 +13,7 @@ describe('Homepage', () => {
       });
 
       it('should display the message', () => {
-        cy.get('#message').should('contain', 'Esta página está en construcción');
+        cy.get('#message').should('contain', 'This page is under construction');
       });
 
       it('should display links as not selected', () => {
@@ -53,7 +53,7 @@ describe('Homepage', () => {
       });
 
       it('should display the message', () => {
-        cy.get('#message').should('contain', 'Esta página está en construcción');
+        cy.get('#message').should('contain', 'This page is under construction');
       });
 
       it('should display links as not selected', () => {
