@@ -37,7 +37,7 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
 
       <div className="flex flex-col justify-between px-4 py-2 bg-gray-800 h-40">
         <div className="font-bold text-gray-200">
-          <h4 className="text-xs mb-2">{new Date(date).toLocaleDateString()}</h4>
+          <h4 className="text-xs mb-2">{new Date(date).toLocaleDateString('en-GB')}</h4>
           <div className="text-xl mb-2">{name}</div>
         </div>
 
