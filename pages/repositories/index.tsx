@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
+import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
 import { ReposViewModel } from '@/github/mappers/repos';
 import { getRepos } from '@/github/api';
@@ -12,9 +12,7 @@ export interface ReposProps {
 export default function Repositories({ repos }: ReposProps): JSX.Element {
   return (
     <>
-      <Head>
-        <title>Repositories</title>
-      </Head>
+      <Meta title="Repositories" description="Demo Repositories" url="/repositories" image="https://git-scm.com/images/logos/downloads/Git-Icon-Black.png" />
       <Navbar />
       <main className="flex flex-wrap justify-center notch bg-gray-100">
         {repos.map((r, index) => (

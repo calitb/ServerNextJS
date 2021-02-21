@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
+import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
 import styles from '@/styles/Home.module.css';
 
@@ -10,9 +10,7 @@ interface Props {
 export default function Home({ message }: Props): JSX.Element {
   return (
     <>
-      <Head>
-        <title>calitb.dev</title>
-      </Head>
+      <Meta title="calitb.dev" description="Personal Site" url="/" image="https://avatars.githubusercontent.com/u/1728291?s=460&u=a2e7380401422c380bb1278f7efe968ab3131df5&v=4" />
       <Navbar />
       <div className={styles.container}>
         <main>

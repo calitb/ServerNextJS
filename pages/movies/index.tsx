@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
+import Meta from '@/components/Meta';
 import { MoviesPageView } from '@/contentful/mappers/moviesPage';
 import Navbar from '@/components/Navbar';
 import { getMovies } from '@/contentful/api';
@@ -12,9 +12,7 @@ export interface MoviesProps {
 export default function Pelis({ movies }: MoviesProps): JSX.Element {
   return (
     <>
-      <Head>
-        <title>Movies Schedule</title>
-      </Head>
+      <Meta title="Movies Schedule" description="Schedule for movies" url="/movies" image="https://i.pinimg.com/originals/6b/4a/73/6b4a738dd051ec314307435efa574807.png" />
       <Navbar />
       <main className="flex flex-wrap justify-center notch ">
         <div className="flex justify-center flex-wrap flex--movie w-full">
