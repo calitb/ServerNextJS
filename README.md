@@ -131,12 +131,6 @@ export CONTENTFUL_TARGET_ENVIRONMENT=e2e
 export MANAGEMENT_ACCESS_TOKEN=<management api token>
 ```
 
-#### Troubleshooting.
-
-Make sure you have at least a blank space in Contentful called `tabula-rasa`.
-
-Make sure the file `tsconfig.json` contains `"module": "CommonJS"` before running the migrations.
-
 ## Continuous Deployment
 
 The file `./update_fe.sh` is required in the deployment machine as specified in the `./github/workflows/deployment.yml` file
@@ -148,8 +142,6 @@ docker stop calitb_fe
 docker rm calitb_fe
 docker-compose up -d
 ```
-
-## Deployment
 
 The following environment variables must be added when starting the docker container:
 
