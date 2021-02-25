@@ -148,3 +148,13 @@ docker stop calitb_fe
 docker rm calitb_fe
 docker-compose up -d
 ```
+
+## Deployment
+
+The following environment variables must be added when starting the docker container:
+
+```bash
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_ACCESS_TOKEN=
+CONTENTFUL_ENVIRONMENT=
+```
