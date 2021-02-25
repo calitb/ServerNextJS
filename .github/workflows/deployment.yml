@@ -143,3 +143,4 @@ jobs:
           user: pi
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
+          args: '-tt'

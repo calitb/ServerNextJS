@@ -136,11 +136,26 @@ export MANAGEMENT_ACCESS_TOKEN=<management api token>
 The file `./update_fe.sh` is required in the deployment machine as specified in the `./github/workflows/deployment.yml` file
 
 ```
+echo "Started"
+
+echo "Starting downloading image"
 docker pull ghcr.io/calitb/site:latest
+echo "Finished downloading image"
+
+echo "Starting deleting old images"
 docker image prune -f
+echo "Finished deleting old images"
+
+echo "Stopping container"
 docker stop calitb_fe
+
+echo "Removing container"
 docker rm calitb_fe
+
+echo "Launching container"
 docker-compose up -d
+
+echo "Finished"
 ```
 
 The following environment variables must be added when starting the docker container:
