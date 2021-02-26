@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build:css": "NODE_ENV=production tailwind build > output.css",
     "dev": "next dev",
     "dev:inspect": "NODE_OPTIONS='--inspect' next dev",
     "build": "./scripts/build.sh && next build",
