@@ -36,3 +36,4 @@ github/types/globals.ts
 cypress-coverage
 jest-coverage
 reports
+public/sitemap.xml
