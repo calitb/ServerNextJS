@@ -9,7 +9,7 @@ export const getMovies = async (): Promise<MoviesPageView> => {
   date.setHours(date.getHours() - 4);
 
   const dateSplit = new Date();
-  dateSplit.setHours(dateSplit.getHours() + 7 * 24);
+  dateSplit.setHours(dateSplit.getHours() + 6 * 24);
 
   const { data } = await gqClient.query<MoviesPage>({
     query: movies,
