@@ -1,51 +1,65 @@
+import { Movie, MoviesPageView } from '@/contentful/mappers/moviesPage';
+
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import Meta from '@/components/Meta';
-import { MoviesPageView } from '@/contentful/mappers/moviesPage';
 import Navbar from '@/components/Navbar';
 import { getMovies } from '@/contentful/api';
 
 export interface MoviesProps {
-  movies: MoviesPageView[];
+  movies: MoviesPageView;
 }
 
-export default function Pelis({ movies }: MoviesProps): JSX.Element {
+export default function Pelis({ movies: { nextMovies, futureMovies } }: MoviesProps): JSX.Element {
   return (
     <>
-      <Meta title="Next Movies" description="Schedule for upcoming watch-together movies" url="/movies" />
+      <Meta title="Próximas Películas" description="Horario para las próximas películas." url="/movies" />
       <Navbar />
-      <main className="flex flex-wrap justify-center notch ">
-        <div className="flex justify-center flex-wrap flex--movie w-full">
-          {movies.map((m, index) => (
-            <MovieListItemView key={m.name} movie={m} index={index} />
-          ))}
-        </div>
+      <main className="flex flex-col items-center notch">
+        {nextMovies.length > 0 && (
+          <section data-cy="nextmovies" className="flex flex-wrap justify-center">
+            <h2 className="text-center font-medium text-xl mt-4">Próximas Películas</h2>
+            <div className="flex justify-center flex-wrap flex--movie w-full">
+              {nextMovies.map((m, index) => (
+                <MovieListItemView key={m.name} movie={m} index={index} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {futureMovies.length > 0 && (
+          <section data-cy="futuremovies" className="flex flex-wrap justify-center">
+            <h2 className="text-center font-medium text-xl mt-4">Películas Futuras</h2>
+            <div className="flex justify-center flex-wrap flex--movie w-full">
+              {futureMovies.map((m, index) => (
+                <MovieListItemView key={m.name} movie={m} index={index} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   );
 }
 
 interface ListItemProps {
-  movie: MoviesPageView;
+  movie: Movie;
   index: number;
 }
 
 function MovieListItemView({ index, movie: { name, date, url, downloadPassword, downloadUrl, image } }: ListItemProps): JSX.Element {
-  const movieDate = new Date(date);
-  const datetime = `${movieDate.toLocaleDateString('es-PA', { day: 'numeric', month: 'long', year: 'numeric' })} - ${movieDate.toLocaleTimeString('es-PA', {
-    hour12: true,
-    hour: '2-digit',
-    minute: '2-digit',
-  })}`;
-
   return (
     <div id={`card-${index}`} className="w-75 rounded overflow-hidden shadow-lg m-4">
-      <img className="w-75 h-110" src={image} alt={`${name} movie poster`} />
+      <img data-cy="image" className="w-75 h-110" src={image} alt={`${name} movie poster`} />
 
       <div className="flex flex-col justify-between px-4 py-2 bg-gray-800 h-40">
         <div className="font-bold text-gray-200">
-          <h4 className="text-xs mb-2">{datetime}</h4>
-          <div className="text-xl mb-2">{name}</div>
+          <h4 data-cy="date" className="text-xs mb-2">
+            {formatDate(date)}
+          </h4>
+          <div data-cy="name" className="text-xl mb-2">
+            {name}
+          </div>
         </div>
 
         <div className="flex justify-between">
@@ -72,6 +86,16 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
       </div>
     </div>
   );
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  const datetime = `${date.toLocaleDateString('es-PA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} - ${date.toLocaleTimeString('es-PA', {
+    hour12: true,
+    hour: '2-digit',
+    minute: '2-digit',
+  })}`;
+  return datetime;
 }
 
 export const getServerSideProps: GetServerSideProps<MoviesProps> = async () => {

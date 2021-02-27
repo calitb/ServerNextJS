@@ -24,7 +24,7 @@ jest.mock('next/router', () => {
 
 test('gets movies from contentful', async () => {
   const mock: MoviesPage = {
-    movies: {
+    nextMovies: {
       items: [
         {
           date: '2023-07-21T12:00:00.000Z',
@@ -48,6 +48,20 @@ test('gets movies from contentful', async () => {
         },
       ],
     },
+    futureMovies: {
+      items: [
+        {
+          date: '2023-07-26T12:00:00.000Z',
+          name: 'Movie3',
+          image: {
+            url: 'movie3.png',
+          },
+          url: 'http://image3.com',
+          downloadUrl: 'http://movie3.com/download',
+          downloadPassword: 'ABC',
+        },
+      ],
+    },
   };
 
   (client.query as jest.Mock).mockResolvedValueOnce({
@@ -59,21 +73,33 @@ test('gets movies from contentful', async () => {
   expect(props.movies).toEqual(result);
 });
 
-const result: MoviesPageView[] = [
-  {
-    date: '2023-07-21T12:00:00.000Z',
-    name: 'Movie1',
-    image: 'movie1.png',
-    url: 'http://image1.com',
-    downloadUrl: 'http://movie1.com/download',
-    downloadPassword: 'ABC',
-  },
-  {
-    date: '2023-07-23T12:00:00.000Z',
-    name: 'Movie2',
-    image: 'movie2.png',
-    url: null,
-    downloadUrl: null,
-    downloadPassword: null,
-  },
-];
+const result: MoviesPageView = {
+  nextMovies: [
+    {
+      date: '2023-07-21T12:00:00.000Z',
+      name: 'Movie1',
+      image: 'movie1.png',
+      url: 'http://image1.com',
+      downloadUrl: 'http://movie1.com/download',
+      downloadPassword: 'ABC',
+    },
+    {
+      date: '2023-07-23T12:00:00.000Z',
+      name: 'Movie2',
+      image: 'movie2.png',
+      url: null,
+      downloadUrl: null,
+      downloadPassword: null,
+    },
+  ],
+  futureMovies: [
+    {
+      date: '2023-07-26T12:00:00.000Z',
+      name: 'Movie3',
+      image: 'movie3.png',
+      url: 'http://image3.com',
+      downloadUrl: 'http://movie3.com/download',
+      downloadPassword: 'ABC',
+    },
+  ],
+};
