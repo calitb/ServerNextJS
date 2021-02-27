@@ -32,13 +32,19 @@ interface ListItemProps {
 
 function MovieListItemView({ index, movie: { name, date, url, downloadPassword, downloadUrl, image } }: ListItemProps): JSX.Element {
   const movieDate = new Date(date);
+  const datetime = `${movieDate.toLocaleDateString('es-PA', { day: 'numeric', month: 'long', year: 'numeric' })} - ${movieDate.toLocaleTimeString('es-PA', {
+    hour12: true,
+    hour: '2-digit',
+    minute: '2-digit',
+  })}`;
+
   return (
     <div id={`card-${index}`} className="w-75 rounded overflow-hidden shadow-lg m-4">
       <img className="w-75 h-110" src={image} alt={`${name} movie poster`} />
 
       <div className="flex flex-col justify-between px-4 py-2 bg-gray-800 h-40">
         <div className="font-bold text-gray-200">
-          <h4 className="text-xs mb-2">{`${movieDate.toLocaleDateString('en-GB')} - ${movieDate.toLocaleTimeString('en-GB', { hour12: true, hour: '2-digit', minute: '2-digit' })}`}</h4>
+          <h4 className="text-xs mb-2">{datetime}</h4>
           <div className="text-xl mb-2">{name}</div>
         </div>
 
