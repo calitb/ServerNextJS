@@ -90,7 +90,7 @@ function MovieListItemView({ index, movie: { name, date, url, downloadPassword, 
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
-  const datetime = `${date.toLocaleDateString('es-PA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} - ${date.toLocaleTimeString('es-PA', {
+  const datetime = `${date.toLocaleDateString('es-PA', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })} - ${date.toLocaleTimeString('es-PA', {
     hour12: true,
     hour: '2-digit',
     minute: '2-digit',
