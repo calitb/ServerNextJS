@@ -1,6 +1,8 @@
 import { INVALID_NATURGY_CREDENTIALS_ERROR, MISSING_PASSWORD_ERROR, PTYCardsParams, ResponseCallback, Split, curlHandler, processResponseString, returnError } from '@/utils/common';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import puppeteer from 'puppeteer';
+
 const URL1 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/LoginAuthentication.gas';
 const URL2 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/MyOfficeHomeLatam.gas';
 
@@ -29,14 +31,16 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
     return returnError(null, MISSING_PASSWORD_ERROR, lang, callback);
   }
 
-  const puppeteer = require('puppeteer');
-
   (async () => {
-    const browser = await puppeteer.launch({
-      headless: true,
-      executablePath: '/usr/bin/chromium-browser',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    const config = process.env.CHROMIUM_PATH
+      ? {
+          headless: true,
+          executablePath: process.env.CHROMIUM_PATH,
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        }
+      : undefined;
+
+    const browser = await puppeteer.launch(config);
 
     const page = await browser.newPage();
 

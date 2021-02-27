@@ -131,7 +131,15 @@ export CONTENTFUL_TARGET_ENVIRONMENT=e2e
 export MANAGEMENT_ACCESS_TOKEN=<management api token>
 ```
 
-## Continuous Deployment
+## Raspberry Setup
+
+Chromium is needed for some of the APIs
+
+```
+sudo apt install chromium-browser chromium-codecs-ffmpeg
+```
+
+### Continuous Deployment
 
 The file `./update_fe.sh` is required in the deployment machine as specified in the `./github/workflows/deployment.yml` file
 
@@ -164,4 +172,5 @@ The following environment variables must be added when starting the docker conta
 CONTENTFUL_SPACE_ID=
 CONTENTFUL_ACCESS_TOKEN=
 CONTENTFUL_ENVIRONMENT=
+CHROMIUM_PATH=/usr/bin/chromium-browser
 ```
