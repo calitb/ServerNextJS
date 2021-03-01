@@ -1,38 +1,10 @@
-import ApolloClient, { InMemoryCache, IntrospectionFragmentMatcher } from "apollo-boost";
-import { createClient } from "contentful";
-import fetch from 'cross-fetch';
+import ApolloClient, { InMemoryCache } from 'apollo-boost';
 
-const {
-  CONTENTFUL_SPACE_ID,
-  CONTENTFUL_ACCESS_TOKEN,
-  CONTENTFUL_ENVIRONMENT,
-} = process.env;
-
-export const contentfulClient = createClient({
-  space: <string>CONTENTFUL_SPACE_ID,
-  accessToken: <string>CONTENTFUL_ACCESS_TOKEN,
-  environment: CONTENTFUL_ENVIRONMENT,
-});
-
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData: {
-    __schema: {
-      types: [], // no types provided
-    },
-  },
-});
+const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN, CONTENTFUL_ENVIRONMENT } = process.env;
 
 export const contentfulGraphQlClient = new ApolloClient({
-  uri:
-    `https://graphql.contentful.com/content/v1/` +
-    `spaces/${CONTENTFUL_SPACE_ID}/` +
-    `environments/${CONTENTFUL_ENVIRONMENT}?` +
-    `access_token=${CONTENTFUL_ACCESS_TOKEN}`,
-  fetch,
+  uri: `https://graphql.contentful.com/content/v1/` + `spaces/${CONTENTFUL_SPACE_ID}/` + `environments/${CONTENTFUL_ENVIRONMENT}?` + `access_token=${CONTENTFUL_ACCESS_TOKEN}`,
   cache: new InMemoryCache({
     addTypename: false,
-    fragmentMatcher
   }),
 });
-

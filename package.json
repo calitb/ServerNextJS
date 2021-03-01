@@ -53,7 +53,6 @@
     "contentful-cli": "^1.5.29",
     "contentful-management": "^7.8.0",
     "contentful-migration": "^4.0.7",
-    "cross-fetch": "^3.0.6",
     "cypress": "^6.5.0",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
