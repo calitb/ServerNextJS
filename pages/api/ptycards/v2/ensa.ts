@@ -14,6 +14,8 @@ import {
 } from '@/utils/common';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { verifyJWT } from '@/utils/jwt';
+
 const REFERER = 'https://clientes.ensa.com.pa/Inicio';
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36';
 const URL1 = 'https://clientes.ensa.com.pa/Default';
@@ -30,6 +32,10 @@ const HEADERS4 = {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
+  if (!(await verifyJWT(req, res))) {
+    return;
+  }
+
   const { query, method, body } = req;
 
   const inParams = method === 'GET' ? query : body;

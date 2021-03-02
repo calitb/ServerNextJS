@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
 
+import { IncomingHttpHeaders } from 'http';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { get } from '@/utils/common';
 
@@ -95,9 +96,10 @@ const typeDefs = gql`
   }
 `;
 
-const promiseWrapper = (url: string, params: Record<string, any>): Promise<string> => {
+const promiseWrapper = (url: string, params: Record<string, any>, headers: IncomingHttpHeaders): Promise<string> => {
   return new Promise((resolve, reject) => {
-    get(url, params, undefined, undefined, (response) => {
+    const { authorization } = headers;
+    get(url, params, { authorization }, undefined, (response) => {
       resolve(response);
     });
   });
@@ -107,38 +109,38 @@ const resolvers = {
   Query: {
     metrobus: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/metrobus';
-      const response = await promiseWrapper(url, args);
+      const response = await promiseWrapper(url, args, context.req.headers);
       return JSON.parse(response);
     },
     corredor: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/corredor';
-      const response = await promiseWrapper(url, args);
+      const response = await promiseWrapper(url, args, context.req.headers);
       return JSON.parse(response);
     },
     idaan: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/idaan';
-      const response = await promiseWrapper(url, args);
+      const response = await promiseWrapper(url, args, context.req.headers);
       return JSON.parse(response);
     },
     ensa: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/ensa';
-      const response = await promiseWrapper(url, args);
+      const response = await promiseWrapper(url, args, context.req.headers);
       return JSON.parse(response);
     },
     naturgy: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/naturgy';
-      const response = await promiseWrapper(url, args);
+      const response = await promiseWrapper(url, args, context.req.headers);
       return JSON.parse(response);
     },
     cableonda: async (parent, args, context) => {
       const url = 'http://localhost:3000/api/ptycards/v2/cableonda';
-      const response = await promiseWrapper(url, args);
+      const response = await promiseWrapper(url, args, context.req.headers);
       return JSON.parse(response);
     },
   },
 };
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers, playground: true });
+const apolloServer = new ApolloServer({ typeDefs, resolvers, playground: false, context: ({ req, res }) => ({ req, res }) });
 
 export const config = {
   api: {

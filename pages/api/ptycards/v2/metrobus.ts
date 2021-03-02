@@ -1,11 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PTYCardsParams, ResponseCallback, Split, curlHandler, get, processResponseString } from '@/utils/common';
 
+import { verifyJWT } from '@/utils/jwt';
+
 const URL1 = 'http://200.46.245.230:8080/PortalCAE-WAR-MODULE/SesionPortalServlet';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
-  const { query, method, body } = req;
+  if (!(await verifyJWT(req, res))) {
+    return;
+  }
 
+  const { query, method, body } = req;
   const inParams = method === 'GET' ? query : body;
   const { user, device, version, lang } = inParams;
 

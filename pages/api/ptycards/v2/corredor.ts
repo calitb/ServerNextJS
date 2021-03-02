@@ -1,9 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PTYCardsParams, ResponseCallback, SplitJSON, curlHandler, post, processResponseJSONString } from '@/utils/common';
 
+import { verifyJWT } from '@/utils/jwt';
+
 const URL1 = 'http://enacorredores.com/api/v2/get-saldo-panapass/json';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
+  if (!(await verifyJWT(req, res))) {
+    return;
+  }
+
   const { query, method, body } = req;
 
   const inParams = method === 'GET' ? query : body;

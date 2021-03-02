@@ -2,11 +2,16 @@ import { INVALID_NATURGY_CREDENTIALS_ERROR, MISSING_PASSWORD_ERROR, PTYCardsPara
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import puppeteer from 'puppeteer';
+import { verifyJWT } from '@/utils/jwt';
 
 const URL1 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/LoginAuthentication.gas';
 const URL2 = 'https://oficinavirtual.naturgy.com.pa/ovlatam-web/MyOfficeHomeLatam.gas';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
+  if (!(await verifyJWT(req, res))) {
+    return;
+  }
+
   const { query, method, body } = req;
 
   const inParams = method === 'GET' ? query : body;
