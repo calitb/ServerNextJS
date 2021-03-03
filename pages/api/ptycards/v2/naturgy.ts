@@ -67,7 +67,7 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
       status: result.status,
       msg: result.msg,
       account: result.account ? result.account.substr(0, result.account.length - 10) : '',
-      balance: result.balance ? Number.parseFloat(result.balance).toFixed(2) : null,
+      balance: result.balance ? Number.parseFloat(result.balance.replace(',', '.')).toFixed(2) : null,
       datetime: error
         ? null
         : {
