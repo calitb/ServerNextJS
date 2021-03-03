@@ -69,7 +69,7 @@ here are the `OPTIONS` that must be passed:
 
 ```bash
 # Authorization
--header "Authorization: Bearer <token>"
+--header "Authorization: Bearer <token>"
 
 # url of Contentful GraphQL endpoint
 --endpoint=<url>
