@@ -25,6 +25,11 @@ export default function Navbar(): JSX.Element {
       url: '/repositories',
       active: router.pathname === '/repositories',
     },
+    {
+      name: 'Engineering Wiki',
+      url: '/wiki',
+      active: router.pathname.startsWith('/wiki/'),
+    },
   ];
 
   return (
