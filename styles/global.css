@@ -15,7 +15,3 @@ div#__next > div > div {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
-
-.notion-viewport {
-  display: none !important;
-}

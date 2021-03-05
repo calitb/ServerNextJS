@@ -43,7 +43,6 @@ function buildURLs(): Array<{ url: string; priority: number }> {
   const fixedURLs = [
     { url: '', priority: 0.5 },
     { url: 'repositories', priority: 1.0 },
-    { url: 'wiki', priority: 1.0 },
   ];
 
   return fixedURLs;
