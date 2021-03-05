@@ -25,6 +25,11 @@ export default function Navbar(): JSX.Element {
       url: '/repositories',
       active: router.pathname === '/repositories',
     },
+    {
+      name: 'Engineering Wiki',
+      url: 'https://www.notion.so/Engineering-Wiki-fe57c54e12574cc6801070cf719ccd1f',
+      active: router.pathname.startsWith('https://www.notion.so/Engineering-Wiki-fe57c54e12574cc6801070cf719ccd1f'),
+    },
   ];
 
   return (
@@ -79,7 +84,7 @@ export default function Navbar(): JSX.Element {
                 <div className="flex space-x-4">
                   {routes.map(({ name, url, active }) => (
                     <Link key={name} href={url}>
-                      <a id={`link-${name}`} className={`${active ? activeRoute : inactiveRoute} px-3 py-2 rounded-md text-sm font-medium`}>
+                      <a id={`link-${name}`} target={url.startsWith('http') ? '_blank' : undefined} className={`${active ? activeRoute : inactiveRoute} px-3 py-2 rounded-md text-sm font-medium`}>
                         {name}
                       </a>
                     </Link>
