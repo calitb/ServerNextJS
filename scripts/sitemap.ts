@@ -8,7 +8,7 @@ import { writeFile } from 'fs';
       hostname: 'https://calitb.dev',
     });
 
-    const urls = buildURLs();
+    const urls = await buildURLs();
 
     urls.forEach(({ url, priority }) => {
       smStream.write({
@@ -39,10 +39,13 @@ import { writeFile } from 'fs';
 
 export {};
 
-function buildURLs(): Array<{ url: string; priority: number }> {
+type SitemapLine = { url: string; priority: number };
+
+async function buildURLs(): Promise<SitemapLine[]> {
   const fixedURLs = [
     { url: '', priority: 0.5 },
     { url: 'repositories', priority: 1.0 },
+    { url: 'wiki', priority: 1.0 },
   ];
 
   return fixedURLs;
