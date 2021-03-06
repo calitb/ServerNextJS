@@ -1,3 +1,5 @@
+import * as notionTypes from 'notion-types';
+
 import { NotionAPI } from 'notion-client';
 import { getAllPagesInSpace } from 'notion-utils';
 
@@ -27,4 +29,33 @@ export async function getNotionPagesId(): Promise<string[]> {
   const allPagesId = pagesIds.concat(subPagesId);
 
   return allPagesId.map((pageId) => pageId.split('-').join(''));
+}
+
+export function getTitle(pageId: string, notionResponse: notionTypes.ExtendedRecordMap): string | null {
+  let fullPageId = pageId;
+  fullPageId = [fullPageId.slice(0, 20), '-', fullPageId.slice(20)].join('');
+  fullPageId = [fullPageId.slice(0, 16), '-', fullPageId.slice(16)].join('');
+  fullPageId = [fullPageId.slice(0, 12), '-', fullPageId.slice(12)].join('');
+  fullPageId = [fullPageId.slice(0, 8), '-', fullPageId.slice(8)].join('');
+
+  return getTitleForPage(fullPageId, notionResponse);
+}
+
+function getTitleForPage(fullPageId: string, notionResponse: notionTypes.ExtendedRecordMap): string | null {
+  const pageInfo = notionResponse.block[fullPageId];
+  if (pageInfo) {
+    const parentId = pageInfo.value.parent_id;
+    const properties = pageInfo.value.properties;
+    if (properties) {
+      const title = properties['title'][0][0];
+
+      const parentTitle = getTitleForPage(parentId, notionResponse);
+      if (parentTitle) {
+        return `${parentTitle} - ${title}`;
+      }
+      return title;
+    }
+  }
+
+  return null;
 }

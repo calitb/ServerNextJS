@@ -2,7 +2,7 @@ import * as notionTypes from 'notion-types';
 
 import { Code, NotionRenderer } from 'react-notion-x';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getNotionPagesId, notion } from '@/utils/notion';
+import { getNotionPagesId, getTitle, notion } from '@/utils/notion';
 
 import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
@@ -33,8 +33,6 @@ export default function NotionPage({ recordMap, title }: Props): JSX.Element {
   );
 }
 
-const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
-
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const pageId = context.params.pageId as string;
 
@@ -57,6 +55,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   }
 };
 
+const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
 export const getStaticPaths: GetStaticPaths = async () => {
   if (isDev) {
     return {
@@ -73,32 +72,3 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: true,
   };
 };
-
-function getTitle(pageId: string, notionResponse: notionTypes.ExtendedRecordMap): string | null {
-  let fullPageId = pageId;
-  fullPageId = [fullPageId.slice(0, 20), '-', fullPageId.slice(20)].join('');
-  fullPageId = [fullPageId.slice(0, 16), '-', fullPageId.slice(16)].join('');
-  fullPageId = [fullPageId.slice(0, 12), '-', fullPageId.slice(12)].join('');
-  fullPageId = [fullPageId.slice(0, 8), '-', fullPageId.slice(8)].join('');
-
-  return getTitleForPage(fullPageId, notionResponse);
-}
-
-function getTitleForPage(fullPageId: string, notionResponse: notionTypes.ExtendedRecordMap): string | null {
-  const pageInfo = notionResponse.block[fullPageId];
-  if (pageInfo) {
-    const parentId = pageInfo.value.parent_id;
-    const properties = pageInfo.value.properties;
-    if (properties) {
-      const title = properties['title'][0][0];
-
-      const parentTitle = getTitleForPage(parentId, notionResponse);
-      if (parentTitle) {
-        return `${parentTitle} - ${title}`;
-      }
-      return title;
-    }
-  }
-
-  return null;
-}
