@@ -32,7 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
-github/types/globals.ts
 cypress-coverage
 jest-coverage
 reports

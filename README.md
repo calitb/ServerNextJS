@@ -84,7 +84,7 @@ here are the `OPTIONS` that must be passed:
 --no-addTypename
 
 # location of global types found in the gql schema
---globalTypesFile=./github/types/globals.ts
+--globalTypesFile=./github/types/globals.d.ts
 
 # place all types in one folder
 --outputFlat
@@ -94,7 +94,7 @@ So to generate the types, execute:
 
 ```bash
 export GITHUB_AUTHORIZATION="Authorization: Bearer YOUR_GITHUB_PERSONAL_TOKEN"
-yarn run apollo client:codegen --header $GITHUB_AUTHORIZATION --endpoint='https://api.github.com/graphql' --target=typescript  --includes='./github/queries/**.ts' --no-addTypename --globalTypesFile=./github/types/globals.ts --outputFlat  './github/types'
+yarn run apollo client:codegen --header $GITHUB_AUTHORIZATION --endpoint='https://api.github.com/graphql' --target=typescript  --includes='./github/queries/**.ts' --no-addTypename --globalTypesFile=./github/types/globals.d.ts --outputFlat  './github/types'
 ```
 
 ## Contentful GraphQL Commands
@@ -102,7 +102,7 @@ yarn run apollo client:codegen --header $GITHUB_AUTHORIZATION --endpoint='https:
 To generate the types, execute:
 
 ```bash
-yarn run apollo client:codegen --endpoint='https://graphql.contentful.com/content/v1/spaces/YOUR_SPACE_ID/environments/YOUR_ENVIRONMENT?access_token=YOUR_TOKEN' --target=typescript  --includes='./contentful/queries/**.ts' --no-addTypename --globalTypesFile=./contentful/types/globals.ts --outputFlat  './contentful/types'
+yarn run apollo client:codegen --endpoint='https://graphql.contentful.com/content/v1/spaces/YOUR_SPACE_ID/environments/YOUR_ENVIRONMENT?access_token=YOUR_TOKEN' --target=typescript  --includes='./contentful/queries/**.ts' --no-addTypename --globalTypesFile=./contentful/types/globals.d.ts --outputFlat  './contentful/types'
 ```
 
 ### Contentful Migrations and Environment Setup
