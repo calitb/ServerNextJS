@@ -14,7 +14,7 @@ export async function getNotionPagesId(): Promise<string[]> {
     traverseCollections: true,
   });
 
-  const pages = notionResponse[process.env.NOTION_WIKI_PAGE_ID].block;
+  const pages = notionResponse[process.env.NOTION_WIKI_PAGE_ID]?.block ?? {};
   const pagesIds = Object.keys(pages);
 
   const subPagesId: string[] = pagesIds.reduce((acum, pageId) => {
