@@ -71,6 +71,7 @@ test('gets movies from contentful', async () => {
             url: 'movie4.png',
           },
           url: 'http://image4.com',
+          cancelled: false,
         },
       ],
     },
@@ -120,6 +121,7 @@ const result: MoviesPageView = {
       name: 'Movie4',
       image: 'movie4.png',
       url: 'http://image4.com',
+      cancelled: false,
     },
   ],
 };
