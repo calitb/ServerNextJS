@@ -34,6 +34,7 @@ export default gql`
           url
         }
         url
+        cancelled
       }
     }
   }

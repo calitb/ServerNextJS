@@ -1,9 +1,9 @@
-import CompactMovieListItemView from '@/components/CompactMovieListItemView';
 import { GetServerSideProps } from 'next';
 import Meta from '@/components/Meta';
 import MovieListItemView from '@/components/MovieListItemView';
 import { MoviesPageView } from '@/contentful/mappers/moviesPage';
 import Navbar from '@/components/Navbar';
+import PastMovieListItemView from '@/components/PastMovieListItemView';
 import { getMovies } from '@/contentful/api';
 
 export interface MoviesProps {
@@ -43,7 +43,7 @@ export default function Pelis({ movies: { nextMovies, futureMovies, pastMovies }
             <h2 className="text-center font-medium text-xl mt-4">Películas Pasadas</h2>
             <div className="flex justify-center flex-wrap flex--movie w-full">
               {pastMovies.map((m, index) => (
-                <CompactMovieListItemView key={m.name} movie={m} index={index} />
+                <PastMovieListItemView key={m.name} movie={m} index={index} />
               ))}
             </div>
           </section>

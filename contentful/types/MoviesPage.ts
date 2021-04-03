@@ -50,6 +50,7 @@ export interface MoviesPage_pastMovies_items {
   name: string | null;
   image: MoviesPage_pastMovies_items_image | null;
   url: string | null;
+  cancelled: boolean | null;
 }
 
 export interface MoviesPage_pastMovies {

@@ -49,4 +49,5 @@ module.exports = function (migration) {
       },
     ]);
   movie.createField('downloadPassword').name('Download Password').type('Symbol');
+  movie.createField('cancelled').name('Cancelled').type('Boolean');
 } as MigrationFunction;

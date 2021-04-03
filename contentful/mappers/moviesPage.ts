@@ -14,6 +14,7 @@ export interface Movie {
   url?: string;
   downloadUrl?: string;
   downloadPassword?: string;
+  cancelled?: boolean;
 }
 
 export default class MoviesMapper extends MapperBase<MoviesPage, MoviesPageView> {
@@ -22,25 +23,26 @@ export default class MoviesMapper extends MapperBase<MoviesPage, MoviesPageView>
       date: date ?? '',
       name: name ?? '',
       image: image.url ?? '',
-      url: url,
-      downloadUrl: downloadUrl,
-      downloadPassword: downloadPassword,
+      url,
+      downloadUrl,
+      downloadPassword,
     }));
 
     const futureMovies: Movie[] = source.futureMovies.items.map(({ date, name, image, url, downloadUrl, downloadPassword }) => ({
       date: date ?? '',
       name: name ?? '',
       image: image.url ?? '',
-      url: url,
-      downloadUrl: downloadUrl,
-      downloadPassword: downloadPassword,
+      url,
+      downloadUrl,
+      downloadPassword,
     }));
 
-    const pastMovies: Movie[] = source.pastMovies.items.map(({ date, name, image, url }) => ({
+    const pastMovies: Movie[] = source.pastMovies.items.map(({ date, name, image, url, cancelled }) => ({
       date: date ?? '',
       name: name ?? '',
       image: image.url ?? '',
-      url: url,
+      url,
+      cancelled,
     }));
 
     return {
