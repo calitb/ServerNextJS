@@ -9,7 +9,7 @@ import { client, locale, publish, spaceId, targetEnv } from '../environment/mana
       title: { [locale]: 'Movie1' },
       file: {
         [locale]: {
-          upload: 'https://via.placeholder.com/300x440?text=Movie1',
+          upload: 'https://images.ctfassets.net/axvknqtceyib/4PE5qodwi0gfS9936ejfzD/b8004fc18c1411e01ca105af8d63a2fb/300x440.png',
           contentType: 'image/png',
           fileName: 'movie1.png',
         },
@@ -24,7 +24,7 @@ import { client, locale, publish, spaceId, targetEnv } from '../environment/mana
       title: { [locale]: 'Movie2' },
       file: {
         [locale]: {
-          upload: 'https://via.placeholder.com/300x440?text=Movie2',
+          upload: 'https://images.ctfassets.net/axvknqtceyib/4PE5qodwi0gfS9936ejfzD/b8004fc18c1411e01ca105af8d63a2fb/300x440.png',
           contentType: 'image/png',
           fileName: 'movie2.png',
         },
@@ -39,7 +39,7 @@ import { client, locale, publish, spaceId, targetEnv } from '../environment/mana
       title: { [locale]: 'Movie3' },
       file: {
         [locale]: {
-          upload: 'https://via.placeholder.com/300x440?text=Movie3',
+          upload: 'https://images.ctfassets.net/axvknqtceyib/4PE5qodwi0gfS9936ejfzD/b8004fc18c1411e01ca105af8d63a2fb/300x440.png',
           contentType: 'image/png',
           fileName: 'movie3.png',
         },
