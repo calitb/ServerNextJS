@@ -2,6 +2,7 @@ import MapperBase from './base';
 import { MoviesPage } from '../types/MoviesPage';
 
 export interface MoviesPageView {
+  pastMovies: Movie[];
   nextMovies: Movie[];
   futureMovies: Movie[];
 }
@@ -35,7 +36,15 @@ export default class MoviesMapper extends MapperBase<MoviesPage, MoviesPageView>
       downloadPassword: downloadPassword,
     }));
 
+    const pastMovies: Movie[] = source.pastMovies.items.map(({ date, name, image, url }) => ({
+      date: date ?? '',
+      name: name ?? '',
+      image: image.url ?? '',
+      url: url,
+    }));
+
     return {
+      pastMovies,
       nextMovies,
       futureMovies,
     };

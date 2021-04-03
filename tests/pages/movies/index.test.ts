@@ -62,6 +62,18 @@ test('gets movies from contentful', async () => {
         },
       ],
     },
+    pastMovies: {
+      items: [
+        {
+          date: '2019-07-26T12:00:00.000Z',
+          name: 'Movie4',
+          image: {
+            url: 'movie4.png',
+          },
+          url: 'http://image4.com',
+        },
+      ],
+    },
   };
 
   (client.query as jest.Mock).mockResolvedValueOnce({
@@ -100,6 +112,14 @@ const result: MoviesPageView = {
       url: 'http://image3.com',
       downloadUrl: 'http://movie3.com/download',
       downloadPassword: 'ABC',
+    },
+  ],
+  pastMovies: [
+    {
+      date: '2019-07-26T12:00:00.000Z',
+      name: 'Movie4',
+      image: 'movie4.png',
+      url: 'http://image4.com',
     },
   ],
 };
