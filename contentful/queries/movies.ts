@@ -26,5 +26,15 @@ export default gql`
         downloadPassword
       }
     }
+    pastMovies: moviesCollection(limit: 8, where: { date_lt: $date }, order: [date_ASC, sys_publishedAt_ASC]) {
+      items {
+        date
+        name
+        image {
+          url
+        }
+        url
+      }
+    }
   }
 `;

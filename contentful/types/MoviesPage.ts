@@ -41,9 +41,25 @@ export interface MoviesPage_futureMovies {
   items: (MoviesPage_futureMovies_items | null)[];
 }
 
+export interface MoviesPage_pastMovies_items_image {
+  url: string | null;
+}
+
+export interface MoviesPage_pastMovies_items {
+  date: any | null;
+  name: string | null;
+  image: MoviesPage_pastMovies_items_image | null;
+  url: string | null;
+}
+
+export interface MoviesPage_pastMovies {
+  items: (MoviesPage_pastMovies_items | null)[];
+}
+
 export interface MoviesPage {
   nextMovies: MoviesPage_nextMovies | null;
   futureMovies: MoviesPage_futureMovies | null;
+  pastMovies: MoviesPage_pastMovies | null;
 }
 
 export interface MoviesPageVariables {
