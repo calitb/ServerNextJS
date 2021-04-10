@@ -146,10 +146,9 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd APP
             ./update_fe.sh
           host: calitb.dev
-          user: pi
-          port: ${{ secrets.SSH_PORT }}
+          user: root
+          port: 22
           key: ${{ secrets.SSH_KEY }}
           args: '-tt'
