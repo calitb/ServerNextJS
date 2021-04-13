@@ -17,6 +17,7 @@ export interface MoviesPage_nextMovies_items {
   image: MoviesPage_nextMovies_items_image | null;
   url: string | null;
   downloadUrl: string | null;
+  downloadUrLs: (string | null)[] | null;
   downloadPassword: string | null;
 }
 
@@ -34,6 +35,7 @@ export interface MoviesPage_futureMovies_items {
   image: MoviesPage_futureMovies_items_image | null;
   url: string | null;
   downloadUrl: string | null;
+  downloadUrLs: (string | null)[] | null;
   downloadPassword: string | null;
 }
 

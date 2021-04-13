@@ -48,6 +48,24 @@ module.exports = function (migration) {
         },
       },
     ]);
+  movie
+    .createField('downloadUrLs')
+    .name('Download URLs')
+    .type('Array')
+    .items({
+      type: 'Symbol',
+      validations: [
+        {
+          unique: true,
+        },
+        {
+          regexp: {
+            pattern: '^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$',
+            flags: null,
+          },
+        },
+      ],
+    });
   movie.createField('downloadPassword').name('Download Password').type('Symbol');
   movie.createField('cancelled').name('Cancelled').type('Boolean');
 } as MigrationFunction;

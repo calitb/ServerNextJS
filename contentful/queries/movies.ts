@@ -11,6 +11,7 @@ export default gql`
         }
         url
         downloadUrl
+        downloadUrLs
         downloadPassword
       }
     }
@@ -23,6 +24,7 @@ export default gql`
         }
         url
         downloadUrl
+        downloadUrLs
         downloadPassword
       }
     }

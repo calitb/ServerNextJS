@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { Movie } from '@/contentful/mappers/moviesPage';
+import React from 'react';
 
 interface ListItemProps {
   movie: Movie;
   index: number;
 }
 
-export default function CompactMovieListItemView({ index, movie: { name, date, url, downloadPassword, downloadUrl, image } }: ListItemProps): JSX.Element {
+export default function CompactMovieListItemView({ index, movie: { name, date, url, downloadPassword, downloadUrls, image } }: ListItemProps): JSX.Element {
   return (
     <div id={`card-${index}`} className="w-75 rounded overflow-hidden shadow-lg m-4">
       <img data-cy="image" className="w-75 h-110" src={image} alt={`${name} movie poster`} />
@@ -23,14 +24,20 @@ export default function CompactMovieListItemView({ index, movie: { name, date, u
 
         <div className="flex justify-between">
           <div className="flex flex-col text-md text-gray-400 ">
-            {downloadUrl && (
-              <Link href={downloadUrl}>
-                <a target="_blank" className="hover:text-gray-100 underline">
-                  Download
-                </a>
-              </Link>
-            )}
-            {downloadUrl && downloadPassword && <p>Pass: {downloadPassword}</p>}
+            <div className="flex flex-row">
+              {downloadUrls &&
+                downloadUrls.map((downloadUrl, index) => (
+                  <React.Fragment key={downloadUrl}>
+                    <Link href={downloadUrl}>
+                      <a target="_blank" className="hover:text-gray-100 underline">
+                        Download
+                      </a>
+                    </Link>
+                    {index < downloadUrls.length - 1 ? ', ' : ''}
+                  </React.Fragment>
+                ))}
+            </div>
+            {downloadPassword && downloadPassword && <p>Pass: {downloadPassword}</p>}
           </div>
           <div className="flex items-center">
             {url && (
