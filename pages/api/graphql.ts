@@ -35,6 +35,7 @@ const typeDefs = gql`
   type CableOndaDetails {
     montoVencido30: String
     montoVencido60: String
+    montoVencido90: String
     montoActual: String
   }
   type MetrobusResult {

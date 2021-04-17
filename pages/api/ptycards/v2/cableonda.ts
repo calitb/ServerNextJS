@@ -58,7 +58,7 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
       callback({
         status: error ? 'error' : 'success',
         msg: msg,
-        balance: error ? null : facturaAlDia ? '0.00' : (Number.parseFloat(result.montoVencido30) + Number.parseFloat(result.montoVencido60) + Number.parseFloat(result.montoActual)).toFixed(2),
+        balance: error ? null : facturaAlDia ? '0.00' : Number.parseFloat(result.montoTotal).toFixed(2),
         datetime: error
           ? null
           : {
@@ -70,6 +70,7 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
           : {
               montoVencido30: facturaAlDia ? '0.00' : Number.parseFloat(result.montoVencido30).toFixed(2),
               montoVencido60: facturaAlDia ? '0.00' : Number.parseFloat(result.montoVencido60).toFixed(2),
+              montoVencido90: facturaAlDia ? '0.00' : Number.parseFloat(result.montoVencido90).toFixed(2),
               montoActual: facturaAlDia ? '0.00' : Number.parseFloat(result.montoActual).toFixed(2),
             },
       });
@@ -90,6 +91,12 @@ const CONFIG1: Split[] = [
   {
     end: '<span class=',
     required: true,
+    field: 'montoTotal',
+    start: '<span id="dolar_simbolo">$</span> ',
+  },
+  {
+    end: '<span class=',
+    required: true,
     field: 'montoActual',
     start: '<span id="dolar_simbolo">$</span> ',
   },
@@ -103,6 +110,12 @@ const CONFIG1: Split[] = [
     end: '<span class=',
     required: true,
     field: 'montoVencido60',
+    start: '<span id="dolar_simbolo">$</span> ',
+  },
+  {
+    end: '<span class=',
+    required: true,
+    field: 'montoVencido90',
     start: '<span id="dolar_simbolo">$</span> ',
   },
 ];

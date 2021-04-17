@@ -25,6 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Record<string, a
       montoActual: inputV2.details ? inputV2.details.montoActual : null,
       montoVencido30: inputV2.details ? inputV2.details.montoVencido30 : null,
       montoVencido60: inputV2.details ? inputV2.details.montoVencido60 : null,
+      montoVencido90: inputV2.details ? inputV2.details.montoVencido90 : null,
     },
   }));
 };
