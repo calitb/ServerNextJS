@@ -1,3 +1,5 @@
-module.exports = () => {
-  return {};
-};
+module.exports = {
+  serverRuntimeConfig: {
+      PROJECT_ROOT: __dirname
+  }
+}
