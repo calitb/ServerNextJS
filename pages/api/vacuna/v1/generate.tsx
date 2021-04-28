@@ -41,28 +41,30 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     organizationName: "MindsLab",
   });
 
-  const pemPath = path.join(
-    serverRuntimeConfig.PROJECT_ROOT,
-    "./passkit/keys/vacunacovid.pem"
-  );
-  await template.loadCertificate(pemPath, "bichos");
+  const ROOT_DIR =
+    process.env.NODE_ENV === "production"
+      ? "/usr/src/app"
+      : serverRuntimeConfig.PROJECT_ROOT;
+
+  const pemPath = path.join(ROOT_DIR, "passkit/keys/vacunacovid.pem");
+  await template.loadCertificate(pemPath, process.env.PASSKIT_PEM_PASS);
 
   await template.images.add(
     "icon",
-    path.join(serverRuntimeConfig.PROJECT_ROOT, "./passkit/images/icon.png")
+    path.join(ROOT_DIR, "passkit/images/icon.png")
   );
   await template.images.add(
     "logo",
-    path.join(serverRuntimeConfig.PROJECT_ROOT, "./passkit/images/logo.png")
+    path.join(ROOT_DIR, "passkit/images/logo.png")
   );
   await template.images.add(
     "icon",
-    path.join(serverRuntimeConfig.PROJECT_ROOT, "./passkit/images/icon@3x.png"),
+    path.join(ROOT_DIR, "passkit/images/icon@3x.png"),
     "3x"
   );
   await template.images.add(
     "logo",
-    path.join(serverRuntimeConfig.PROJECT_ROOT, "./passkit/images/logo@3x.png"),
+    path.join(ROOT_DIR, "passkit/images/logo@3x.png"),
     "3x"
   );
 
@@ -104,8 +106,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
   pass.backFields.add({
     key: "url-pass-generator",
-    label: "Panama Digital",
-    value: "https://calitb.dev/api/vacuna/v1/generate",
+    label: "Generador de Pase",
+    value: "https://calitb.dev/vacuna",
     dataDetectorTypes: ["PKDataDetectorTypeLink"],
   });
 
