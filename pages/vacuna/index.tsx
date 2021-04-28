@@ -1,9 +1,9 @@
-import Meta from "@/components/Meta";
-import Navbar from "@/components/Navbar";
-import { useState } from "react";
+import Meta from '@/components/Meta';
+import Navbar from '@/components/Navbar';
+import { useState } from 'react';
 
 export default function Home(): JSX.Element {
-  const [data, setData] = useState<Record<string, any>>({ dosis: "0" });
+  const [data, setData] = useState<Record<string, any>>({ dosis: '0' });
 
   return (
     <>
@@ -14,23 +14,18 @@ export default function Home(): JSX.Element {
           <div className="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-sm">
             <form action="api/vacuna/v1/generate" method="POST">
               <div className="mb-6">
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                >
+                <label htmlFor="name" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                   Nombre
                 </label>
                 <input
                   onInvalid={() => {
-                    document
-                      .getElementById("name")
-                      .setCustomValidity("Por favor llena este campo");
+                    (document.getElementById('name') as any).setCustomValidity('Por favor llena este campo');
                   }}
                   onChange={(event) => {
-                    document.getElementById("name").setCustomValidity("");
+                    (document.getElementById('name') as any).setCustomValidity('');
                     setData({ ...data, name: event.target.value });
                   }}
-                  value={data["name"]}
+                  value={data['name']}
                   type="text"
                   name="name"
                   id="name"
@@ -41,23 +36,18 @@ export default function Home(): JSX.Element {
               </div>
 
               <div className="mb-6">
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                >
+                <label htmlFor="name" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                   Identificaci&oacute;n
                 </label>
                 <input
                   onInvalid={() => {
-                    document
-                      .getElementById("identifier")
-                      .setCustomValidity("Por favor llena este campo");
+                    (document.getElementById('identifier') as any).setCustomValidity('Por favor llena este campo');
                   }}
                   onChange={(event) => {
-                    document.getElementById("identifier").setCustomValidity("");
+                    (document.getElementById('identifier') as any).setCustomValidity('');
                     setData({ ...data, identifier: event.target.value });
                   }}
-                  value={data["identifier"]}
+                  value={data['identifier']}
                   type="text"
                   name="identifier"
                   id="identifier"
@@ -68,10 +58,7 @@ export default function Home(): JSX.Element {
               </div>
 
               <div className="mb-6">
-                <label
-                  htmlFor="dosis"
-                  className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                >
+                <label htmlFor="dosis" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                   Dosis Aplicadas
                 </label>
                 <input
@@ -80,7 +67,7 @@ export default function Home(): JSX.Element {
                   name="dosis"
                   value="0"
                   className="mr-1"
-                  checked={data["dosis"] === "0"}
+                  checked={data['dosis'] === '0'}
                   onChange={(event) => {
                     setData({ ...data, dosis: event.target.value });
                   }}
@@ -94,7 +81,7 @@ export default function Home(): JSX.Element {
                   name="dosis"
                   value="1"
                   className="mr-1"
-                  checked={data["dosis"] === "1"}
+                  checked={data['dosis'] === '1'}
                   onChange={(event) => {
                     setData({ ...data, dosis: event.target.value });
                   }}
@@ -108,7 +95,7 @@ export default function Home(): JSX.Element {
                   name="dosis"
                   value="2"
                   className="mr-1"
-                  checked={data["dosis"] === "2"}
+                  checked={data['dosis'] === '2'}
                   onChange={(event) => {
                     setData({ ...data, dosis: event.target.value });
                   }}
@@ -118,12 +105,9 @@ export default function Home(): JSX.Element {
                 </label>
               </div>
 
-              {data["dosis"] !== "0" && (
+              {data['dosis'] !== '0' && (
                 <div className="mb-6">
-                  <label
-                    htmlFor="dosis"
-                    className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                  >
+                  <label htmlFor="dosis" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                     Vacuna
                   </label>
                   <input
@@ -132,7 +116,7 @@ export default function Home(): JSX.Element {
                     name="vacuna"
                     value="Pfizer"
                     className="mr-1"
-                    checked={data["vacuna"] === "Pfizer"}
+                    checked={data['vacuna'] === 'Pfizer'}
                     onChange={(event) => {
                       setData({ ...data, vacuna: event.target.value });
                     }}
@@ -146,7 +130,7 @@ export default function Home(): JSX.Element {
                     name="vacuna"
                     value="Astrazeneca"
                     className="mr-1"
-                    checked={data["vacuna"] === "Astrazeneca"}
+                    checked={data['vacuna'] === 'Astrazeneca'}
                     onChange={(event) => {
                       setData({ ...data, vacuna: event.target.value });
                     }}
@@ -157,25 +141,20 @@ export default function Home(): JSX.Element {
                 </div>
               )}
 
-              {data["dosis"] !== "0" && (
+              {data['dosis'] !== '0' && (
                 <div className="mb-6">
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                  >
+                  <label htmlFor="name" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                     Fecha de Aplicación
                   </label>
                   <input
                     onInvalid={() => {
-                      document
-                        .getElementById("date")
-                        .setCustomValidity("Por favor llena este campo");
+                      (document.getElementById('date') as any).setCustomValidity('Por favor llena este campo');
                     }}
                     onChange={(event) => {
-                      document.getElementById("name").setCustomValidity("");
+                      (document.getElementById('date') as any).setCustomValidity('');
                       setData({ ...data, date: event.target.value });
                     }}
-                    value={data["date"]}
+                    value={data['date']}
                     type="date"
                     name="date"
                     id="date"
@@ -186,23 +165,18 @@ export default function Home(): JSX.Element {
               )}
 
               <div className="mb-6">
-                <label
-                  htmlFor="url"
-                  className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                >
+                <label htmlFor="url" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                   URL Panama Digital
                 </label>
                 <input
                   onInvalid={() => {
-                    document
-                      .getElementById("url")
-                      .setCustomValidity("Por favor llena este campo");
+                    (document.getElementById('url') as any).setCustomValidity('Por favor llena este campo');
                   }}
                   onChange={(event) => {
-                    document.getElementById("url").setCustomValidity("");
+                    (document.getElementById('url') as any).setCustomValidity('');
                     setData({ ...data, url: event.target.value });
                   }}
-                  value={data["url"]}
+                  value={data['url']}
                   type="text"
                   name="url"
                   id="url"
@@ -213,10 +187,7 @@ export default function Home(): JSX.Element {
               </div>
 
               <div className="mb-6">
-                <button
-                  type="submit"
-                  className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
-                >
+                <button type="submit" className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">
                   Generar
                 </button>
               </div>
