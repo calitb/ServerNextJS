@@ -146,6 +146,7 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
+            cd calitb.dev
             ./update_fe.sh
           host: calitb.dev
           user: root
