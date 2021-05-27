@@ -16,7 +16,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const REFERER = 'https://clientes.ensa.com.pa/Inicio';
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36';
-const URL1 = 'https://clientes.ensa.com.pa/Default';
+const URL1 = 'https://clientes.ensa.com.pa/';
 const URL2 = URL1;
 const URL3 = 'https://clientes.ensa.com.pa/Pages/Cuentas';
 const URL4 = 'https://clientes.ensa.com.pa/Pages/Cuentas.aspx/Details';
@@ -61,9 +61,9 @@ export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
     __LASTFOCUS: '',
     __EVENTTARGET: '',
     __EVENTARGUMENT: '',
-    __VIEWSTATE: '/wEPDwUJMTA2ODcxMzY1ZGRg3NshX4SWx6o3pRV1xGTg4moQSyQBvo4+Clz7ViTLNQ==',
+    __VIEWSTATE: '/wEPDwULLTExNDc5Nzk1MDJkZHK+KD5DTwygLqfYIn8MxGX9FyrWdeykWS6sp2rqCuyD',
     __VIEWSTATEGENERATOR: 'CA0B0334',
-    __EVENTVALIDATION: '/wEdAAQ9n0R7lGk50UU/1Xv6p5PrhlMHfInnE96XUBqK4RvoMIJZlfQ9X2NSL0EVdSpJzTTebHEaNQL/mB/LXoXtvbZIZtVlvO1mhL7kq01Jp+hPPF3+5QsUi/Rt/RG5d+afuBU=',
+    __EVENTVALIDATION: '/wEdAASX1r1t5ha1B1TEtdS8S1NPhlMHfInnE96XUBqK4RvoMIJZlfQ9X2NSL0EVdSpJzTTebHEaNQL/mB/LXoXtvbZIvCEo7+rVTL4hGPjQh5EX2iGzDL5Op5LRSGjwV05XcgE=',
     ctl00$PageContent$TbUser: params.user,
     ctl00$PageContent$TbPassword: params.pass,
     __ASYNCPOST: true,
