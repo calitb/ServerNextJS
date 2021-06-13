@@ -24,6 +24,17 @@ div#__next > div > div {
     font-size: 1.17em;
     margin: 0.83em 0;
   }
+  h4 {
+    margin: 1.12em 0;
+  }
+  h5 {
+    font-size: 0.83em;
+    margin: 1.5em 0;
+  }
+  h6 {
+    font-size: 0.75em;
+    margin: 1.67em 0;
+  }
 }
 
 .notch {
