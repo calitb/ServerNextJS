@@ -45,14 +45,3 @@ div#__next > div > div {
 .notion-viewport {
   display: none !important;
 }
-
-/* Theme */
-
-:root {
-  color-scheme: light dark;
-}
-
-.themed {
-  color: var(--color);
-  background-color: var(--background-color);
-}
