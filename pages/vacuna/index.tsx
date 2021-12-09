@@ -2,7 +2,7 @@ import Meta from "@/components/Meta";
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 
-export default function Home(): JSX.Element {
+export default function Vacuna(): JSX.Element {
   const [data, setData] = useState<Record<string, any>>({ dosis: "0" });
 
   const onChange = (id: string, value: string) => {
