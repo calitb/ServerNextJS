@@ -25,10 +25,10 @@ export default function ExpoBuilds({ builds }: Props): JSX.Element {
         <section className="w-full">
           {appIdentifiers.map(appIdentifier => (
             <div key={appIdentifier}>
-              {builds[appIdentifier].filter((build) => {
-                const expiration = new Date(build.expirationDate);
+              {builds[appIdentifier].filter(({ error, expirationDate }) => {
+                const expiration = new Date(expirationDate);
                 const availability = Math.floor((expiration.getTime() - now.getTime()) / (1000 * 3600 * 24));
-                return availability > 1;
+                return !error && availability > 1;
               }).map(build => (
                 <BuildView key={build.id} build={build} />
               ))}
@@ -44,8 +44,12 @@ interface BuildProps {
   build: ExpoBuild;
 }
 
+const BUILD_URLS = {
+  "com.mindslab.tvguide": "https://expo.dev/accounts/calitb-org/projects/tv-guide/builds"
+};
+
 function BuildView({ build }: BuildProps): JSX.Element {
-  const { id, expirationDate, createdAt, platform, artifacts: { buildUrl }, metadata: { appName, appVersion, appBuildVersion, distribution, buildProfile, gitCommitHash, sdkVersion } } = build;
+  const { id, expirationDate, createdAt, platform, metadata: { appIdentifier, appName, appVersion, appBuildVersion, distribution, buildProfile, gitCommitHash, sdkVersion } } = build;
 
   const now = new Date();
   const expiration = new Date(expirationDate);
@@ -77,7 +81,7 @@ function BuildView({ build }: BuildProps): JSX.Element {
           </div>
           <div>
             <div id="button" className="py-2">
-              <Link href={buildUrl}>
+              <Link href={`${BUILD_URLS[appIdentifier]}/${id}`}>
                 <a
                   target="_blank"
                   className="block tracking-widest uppercase text-center shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded"
@@ -90,18 +94,6 @@ function BuildView({ build }: BuildProps): JSX.Element {
         </div>
       </div>
     </div>
-
-    // <div>
-    //   <div className="text-xl">{formatDate(createdAt)}{platform}</div>
-    //   {appName}{appVersion}{appBuildVersion}{distribution}{buildProfile}{gitCommitHash}{sdkVersion}{status}{expirationDate}
-
-    //   {buildUrl}
-    //   <Link href={buildUrl}>
-    //     <a target="_blank" className="hover:text-gray-400 underline">
-    //       Download
-    //     </a>
-    //   </Link>
-    // </div>
   )
 }
 
