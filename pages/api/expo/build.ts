@@ -33,9 +33,8 @@ function checkSignature(req: NextApiRequest): boolean {
   const hmac = crypto.createHmac('sha1', process.env.EXPO_SECRET_WEBHOOK_KEY);
   hmac.update(JSON.stringify(req.body));
   const hash = `sha1=${hmac.digest('hex')}`;
-  console.log('signature check: ', safeCompare(expoSignature, hash))
 
-  return true;
+  return safeCompare(expoSignature, hash);
 }
 
 function readBuilds(): Record<string, any> {
