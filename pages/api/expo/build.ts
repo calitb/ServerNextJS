@@ -50,7 +50,7 @@ function readBuilds(): Record<string, any> {
 function addBuild(appIdentifier: string, previousBuilds: ExpoBuildFileData, buildData: ExpoBuild) {
   createDir();
   const appBuilds: ExpoBuild[] = previousBuilds[appIdentifier] ?? [];
-  appBuilds.push(buildData);
+  appBuilds.unshift(buildData);
   previousBuilds[appIdentifier] = appBuilds;
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(previousBuilds))
 }
