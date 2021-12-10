@@ -37,4 +37,4 @@ jest-coverage
 reports
 public/sitemap.xml
 
-expo_builds.json
+files/expo_builds.json

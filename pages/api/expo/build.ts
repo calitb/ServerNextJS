@@ -4,7 +4,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import safeCompare from 'safe-compare';
 import { ExpoBuild, ExpoBuildFileData } from 'types';
 
-const OUTPUT_FILE = "./expo_builds.json";
+const OUTPUT_DIR = "./files";
+const OUTPUT_FILE = `${OUTPUT_DIR}/expo_builds.json`;
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { query, method, body } = req;
@@ -40,6 +41,7 @@ function checkSignature(req: NextApiRequest): boolean {
 
 function readBuilds(): Record<string, any> {
   try {
+    createDir();
     const fileContent = fs.readFileSync(OUTPUT_FILE, 'utf8');
     return JSON.parse(fileContent);
   } catch {
@@ -48,8 +50,15 @@ function readBuilds(): Record<string, any> {
 }
 
 function addBuild(appIdentifier: string, previousBuilds: ExpoBuildFileData, buildData: ExpoBuild) {
+  createDir();
   const appBuilds: ExpoBuild[] = previousBuilds[appIdentifier] ?? [];
   appBuilds.push(buildData);
   previousBuilds[appIdentifier] = appBuilds;
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(previousBuilds))
+}
+
+function createDir() {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
 }
