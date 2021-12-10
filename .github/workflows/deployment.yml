@@ -57,6 +57,7 @@ jobs:
           CONTENTFUL_ENVIRONMENT: 'e2e'
           NOTION_SPACE_ID: ${{ secrets.NOTION_SPACE_ID }}
           NOTION_WIKI_PAGE_ID: ${{ secrets.NOTION_WIKI_PAGE_ID }}
+          EXPO_SECRET_WEBHOOK_KEY: ${{ secrets.EXPO_SECRET_WEBHOOK_KEY }}
 
       - name: Run e2e
         run: yarn cy:run
@@ -106,6 +107,7 @@ jobs:
           CONTENTFUL_ENVIRONMENT: 'master'
           NOTION_SPACE_ID: ${{ secrets.NOTION_SPACE_ID }}
           NOTION_WIKI_PAGE_ID: ${{ secrets.NOTION_WIKI_PAGE_ID }}
+          EXPO_SECRET_WEBHOOK_KEY: ${{ secrets.EXPO_SECRET_WEBHOOK_KEY }}
 
       - name: Set up Docker Buildx
         if: github.ref == 'refs/heads/main'

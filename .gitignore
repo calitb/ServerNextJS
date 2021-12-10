@@ -36,3 +36,5 @@ cypress-coverage
 jest-coverage
 reports
 public/sitemap.xml
+
+files/expo_builds.json
