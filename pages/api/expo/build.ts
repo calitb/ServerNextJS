@@ -29,14 +29,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 function checkSignature(req: NextApiRequest): boolean {
-  return true;
-
   const expoSignature = req.headers['expo-signature'];
-  // process.env.SECRET_WEBHOOK_KEY has to match SECRET value set with `eas webhook:create` command
   const hmac = crypto.createHmac('sha1', process.env.EXPO_SECRET_WEBHOOK_KEY);
   hmac.update(JSON.stringify(req.body));
   const hash = `sha1=${hmac.digest('hex')}`;
-  return safeCompare(expoSignature, hash);
+  console.log('signature check: ', safeCompare(expoSignature, hash))
+
+  return true;
 }
 
 function readBuilds(): Record<string, any> {
