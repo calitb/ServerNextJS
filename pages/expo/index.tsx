@@ -116,7 +116,7 @@ function BuildView({ build }: BuildProps): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const res = await fetch(`https://calitb.dev/api/expo/build`)
+  const res = await fetch(`http://localhost:3000/api/expo/build`)
   const data: { status: string; builds: ExpoBuildFileData } = await res.json()
   return { props: { builds: data.builds } };
 };
