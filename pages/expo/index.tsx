@@ -2,16 +2,28 @@ import Meta from "@/components/Meta";
 import Navbar from "@/components/Navbar";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
+import { useState } from "react";
 import { ExpoBuild, ExpoBuildFileData } from "types";
 
 export interface Props {
   builds: ExpoBuildFileData;
 }
 
-export default function ExpoBuilds({ builds }: Props): JSX.Element {
-  const appIdentifiers = Object.keys(builds);
+const BUILD_URLS = {
+  "com.mindslab.tvguide": "https://expo.dev/accounts/calitb-org/projects/tv-guide/builds"
+};
+const APP_IDENTIFIERS = Object.keys(BUILD_URLS);
 
-  const now = new Date();
+const TYPES_FILTERS = {
+  "Preview (AdHoc)": (build: ExpoBuild) => build.metadata.buildProfile === "preview" && !build.error,
+  "Store": (build: ExpoBuild) => build.metadata.buildProfile === "production" && build.metadata.distribution === 'store' && !build.error,
+  "Expo Development client": (build: ExpoBuild) => build.metadata.buildProfile === "development" && !build.error,
+}
+const TYPES = Object.keys(TYPES_FILTERS);
+
+export default function ExpoBuilds({ builds }: Props): JSX.Element {
+  const [selectedAppIdentifier, setSelectedAppIdentifier] = useState(APP_IDENTIFIERS[0])
+  const [selectedBuildType, setSelectedBuildType] = useState(TYPES[0])
 
   return (
     <>
@@ -23,17 +35,27 @@ export default function ExpoBuilds({ builds }: Props): JSX.Element {
       <Navbar />
       <main className="flex flex-col items-center notch">
         <section className="w-full">
-          {appIdentifiers.map(appIdentifier => (
-            <div key={appIdentifier}>
-              {builds[appIdentifier].filter(({ error, expirationDate }) => {
-                const expiration = new Date(expirationDate);
-                const availability = Math.floor((expiration.getTime() - now.getTime()) / (1000 * 3600 * 24));
-                return !error && availability > 1;
-              }).map(build => (
-                <BuildView key={build.id} build={build} />
-              ))}
-            </div>
+          <div className="px-5">
+            <label>App Identifier:</label>
+            <select name="appIdentifier" id="appIdentifier" onChange={(event) => setSelectedAppIdentifier(event.target.value)}>
+              {APP_IDENTIFIERS.map((identifier) => <option key={identifier} value={identifier}>{identifier}</option>)}
+            </select>
+          </div>
+          <div className="px-5">
+            <label>Build type:</label>
+            <select name="buildType" id="buildType" onChange={(event) => setSelectedBuildType(event.target.value)}>
+              {TYPES.map((type) => <option key={type} value={type}>{type}</option>)}
+            </select>
+          </div>
+
+          {builds[selectedAppIdentifier].filter((build) => {
+            const expiration = new Date(build.expirationDate);
+            const availability = Math.floor((expiration.getTime() - Date.now().valueOf()) / (1000 * 3600 * 24));
+            return availability > 1 && TYPES_FILTERS[selectedBuildType](build);
+          }).map(build => (
+            <BuildView key={build.id} build={build} />
           ))}
+
         </section>
       </main>
     </>
@@ -43,10 +65,6 @@ export default function ExpoBuilds({ builds }: Props): JSX.Element {
 interface BuildProps {
   build: ExpoBuild;
 }
-
-const BUILD_URLS = {
-  "com.mindslab.tvguide": "https://expo.dev/accounts/calitb-org/projects/tv-guide/builds"
-};
 
 function BuildView({ build }: BuildProps): JSX.Element {
   const { id, expirationDate, createdAt, platform, metadata: { appIdentifier, appName, appVersion, appBuildVersion, distribution, buildProfile, gitCommitHash, sdkVersion } } = build;
@@ -86,7 +104,7 @@ function BuildView({ build }: BuildProps): JSX.Element {
                   target="_blank"
                   className="block tracking-widest uppercase text-center shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded"
                 >
-                  Download
+                  Go to Expo
                 </a>
               </Link>
             </div>
@@ -97,9 +115,8 @@ function BuildView({ build }: BuildProps): JSX.Element {
   )
 }
 
-
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const res = await fetch(`http://localhost:3000/api/expo/build`)
+  const res = await fetch(`https://calitb.dev/api/expo/build`)
   const data: { status: string; builds: ExpoBuildFileData } = await res.json()
   return { props: { builds: data.builds } };
 };
