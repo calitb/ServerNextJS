@@ -30,6 +30,11 @@ export default function Navbar(): JSX.Element {
       url: '/wiki',
       active: router.pathname.startsWith('/wiki/'),
     },
+    {
+      name: 'Expo Builds',
+      url: '/expo',
+      active: router.pathname === '/expo',
+    },
   ];
 
   return (

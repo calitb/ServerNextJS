@@ -8,10 +8,14 @@ import 'rc-dropdown/assets/index.css'
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css'
 
+import { SessionProvider } from "next-auth/react";
 import { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps: { session, ...pageProps }}: AppProps): JSX.Element {
+  return (
+    <SessionProvider session={session}>
+    <Component {...pageProps} />
+    </SessionProvider>);
 }
 
 export default MyApp;
