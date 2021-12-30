@@ -1,3 +1,4 @@
+import AuthWrapper from "@/components/Auth";
 import Meta from "@/components/Meta";
 import Navbar from "@/components/Navbar";
 import { GetServerSideProps } from "next";
@@ -26,7 +27,7 @@ export default function ExpoBuilds({ builds }: Props): JSX.Element {
   const [selectedBuildType, setSelectedBuildType] = useState(TYPES[0])
 
   return (
-    <>
+    <AuthWrapper>
       <Meta
         title="Expo Builds"
         description="Expo builds"
@@ -58,7 +59,7 @@ export default function ExpoBuilds({ builds }: Props): JSX.Element {
 
         </section>
       </main>
-    </>
+    </AuthWrapper>
   );
 }
 
