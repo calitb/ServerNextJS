@@ -1,7 +1,7 @@
+import { curlHandler, post, processResponseJSONString, PTYCardsParams, ResponseCallback, SplitJSON } from '@/utils/common';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PTYCardsParams, ResponseCallback, SplitJSON, curlHandler, post, processResponseJSONString } from '@/utils/common';
 
-const URL1 = 'http://enacorredores.com/api/v2/get-saldo-panapass/json';
+const URL1 = 'https://enacorredores.com/api/v2/get-saldo-panapass/json';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Record<string, any>>) => {
   const { query, method, body } = req;
@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Record<string, a
 
 export const fetch = (params: PTYCardsParams, callback: ResponseCallback) => {
   const headers = {
-    Referer: 'http://enacorredores.com',
+    Referer: 'https://enacorredores.com',
   };
 
   const body = {
