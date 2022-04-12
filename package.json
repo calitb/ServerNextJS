@@ -25,7 +25,6 @@
   "dependencies": {
     "@types/jsdom": "^12.2.3",
     "@walletpass/pass-js": "^6.9.1",
-    "apollo-server-micro": "^2.19.2",
     "autoprefixer": "^10.2.4",
     "contentful": "^8.1.7",
     "crypto": "^1.0.1",
@@ -35,11 +34,9 @@
     "next-auth": "^4.0.6",
     "notion-client": "^4.3.2",
     "postcss": "^8.2.4",
-    "puppeteer": "^8.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-notion-x": "^4.3.7",
-    "request": "^2.85.0",
     "safe-compare": "^1.1.4",
     "tailwindcss": "^2.0.2"
   },
