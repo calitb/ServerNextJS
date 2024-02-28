@@ -1,1 +1,0 @@
-yarn run ts-node ./scripts/sitemap.ts
