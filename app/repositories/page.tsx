@@ -4,13 +4,20 @@ import { ReposViewModel } from "@/github/mappers/repos";
 import { Metadata } from "next";
 import Link from "next/link";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-  title: "calitb.dev",
+  title: "Repositories",
   description: "Personal Site",
 };
 
 export default async function Page() {
-  const reposToShow = ["Unmatched"];
+  const reposToShow = [
+    "Unmatched",
+    "Sample-VueJS",
+    "Sample-NextJS",
+    "calitbdev",
+  ];
 
   const repos = (await getRepos()).filter((repo) =>
     reposToShow.includes(repo.name),
