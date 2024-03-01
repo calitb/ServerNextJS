@@ -1,0 +1,46 @@
+@import 'https://fonts.googleapis.com/css?family=Inconsolata';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.notch {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.home-container {
+  background-image: radial-gradient(#11581e, #041607);
+  font-family: 'Inconsolata', Helvetica, sans-serif;
+  color: rgba(128, 255, 128, 0.8);
+  text-shadow: 0 0 1ex rgba(51, 255, 51, 1), 0 0 2px rgba(255, 255, 255, 0.8);
+  /* @apply bg-black text-2xl box-border; */
+}
+
+.overlay {
+  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+  background-size: auto 4px;
+}
+
+.overlay::before {
+  content: '';
+  background-image: linear-gradient(0deg, transparent 0%, rgba(32, 128, 32, 0.2) 2%, rgba(32, 128, 32, 0.8) 3%, rgba(32, 128, 32, 0.2) 3%, transparent 100%);
+  background-repeat: no-repeat;
+  animation: scan 7.5s linear 0s infinite;
+  @apply h-full w-full absolute pointer-events-none block inset-0;
+}
+
+@keyframes scan {
+  0% {
+    background-position: 0 -100vh;
+  }
+
+  35%,
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+.terminal-shadow {
+  text-shadow: 0 0 1px rgba(51, 255, 51, 0.4), 0 0 2px rgba(255, 255, 255, 0.8);
+}

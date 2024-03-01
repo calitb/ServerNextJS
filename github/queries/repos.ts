@@ -1,9 +1,14 @@
-import { gql } from 'apollo-boost';
+import { gql } from "apollo-boost";
 
 export default gql`
   query Repos {
     viewer {
-      repositories(orderBy: { field: NAME, direction: ASC }, first: 50, privacy: PUBLIC, isFork: false) {
+      repositories(
+        orderBy: { field: NAME, direction: ASC }
+        first: 50
+        privacy: PUBLIC
+        isFork: false
+      ) {
         edges {
           node {
             __typename
@@ -12,6 +17,7 @@ export default gql`
               name
               url
               description
+              homepageUrl
               repositoryTopics(first: 6) {
                 nodes {
                   topic {

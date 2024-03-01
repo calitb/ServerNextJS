@@ -1,8 +1,7 @@
-import ReposMapper, { ReposViewModel } from './mappers/repos';
-
-import { Repos } from './types/Repos';
-import { githubGraphQlClient as gqClient } from './client';
-import repos from './queries/repos';
+import { githubGraphQlClient as gqClient } from "./client";
+import ReposMapper, { ReposViewModel } from "./mappers/repos";
+import repos from "./queries/repos";
+import { Repos } from "./types/Repos";
 
 export const getRepos = async (): Promise<ReposViewModel[]> => {
   const { data } = await gqClient.query<Repos>({
