@@ -12,12 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const reposToShow = [
-    "Unmatched",
-    "Sample-VueJS",
-    "Sample-NextJS",
-    "calitbdev",
-  ];
+  const reposToShow = ["Unmatched", "Sample-VueJS", "calitbdev"];
 
   const repos = (await getRepos()).filter((repo) =>
     reposToShow.includes(repo.name),
